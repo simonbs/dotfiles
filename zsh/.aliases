@@ -1,0 +1,2 @@
+alias xcopen="python ~/Developer/xcopen/xcopen.py"
+alias dog="pygmentize -g"

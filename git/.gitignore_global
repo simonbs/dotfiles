@@ -1,0 +1,14 @@
+.DS_Store
+*.aux
+*.log
+*.out
+*.dvi
+*.fdb_latexmk
+*.fls
+**/auto/*.el
+*.bbl
+*.blg
+\#*\#
+.\#*
+node_modules
+venv

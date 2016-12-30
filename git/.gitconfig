@@ -1,0 +1,59 @@
+[user]
+  email = mail@simonbs.dk
+  name = Simon Støvring
+
+[alias]
+  # List commits in short form, with colors and branch/tag annotations
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+  # List with no colors if you need to chain the out put with Unix pipes
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+  # List oneline commits showing dates
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+
+  # List oneline commits showing relative dates
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+
+  # Default look for short git log
+  le = log --oneline --decorate
+
+  # Show log as graph
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lgs = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+  lgn = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --numstat
+  lgp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p
+
+  # Show the history of a file, with diffs
+  filelog = log -u
+  fl = log -u
+
+  # Find a file path in codebase
+  f = "!git ls-files | grep -i"
+
+  # Search/grep your entire codebase for a string
+  grep = grep -Ii
+  gr = grep -Ii
+
+  # List all your Aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  # Basic Shortcuts
+  cp = cherry-pick
+  st = status -s
+  cl = clone
+  ci = commit
+  co = checkout
+  br = branch
+  diff = diff --word-diff
+  dc = diff --cached
+
+  # Pull using rebase
+  p = pull --rebase
+[core]
+	excludefiles = /Users/simonbs/.gitignore_global
+	excludesfile = /Users/simonbs/.gitignore_global
+	editor = emacs
+[merge]
+	tool = emerge
