@@ -105,7 +105,3 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 source ~/.aliases 2> /dev/null
-
-# https://github.com/shapehq/SHPScripts
-export PATH=~/Developer/SHPScripts:$PATH
-
