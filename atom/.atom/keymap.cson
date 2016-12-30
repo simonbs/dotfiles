@@ -33,6 +33,4 @@
 
 'atom-workspace atom-text-editor:not([mini])':
   'cmd-(': 'editor:fold-current-row'
-
-'atom-workspace atom-text-editor:not([mini])':
   'cmd-)': 'editor:unfold-current-row'
