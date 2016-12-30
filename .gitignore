@@ -4,11 +4,10 @@
 .\#*
 
 # atom
-atom/storage
-atom/compile-cache
-atom/dev
-atom/.apm
-atom/.node-gyp
-atom/packages
-atom/storage
-atom/blob-store
+atom/.atom/.apm
+atom/.atom/.node-gyp
+atom/.atom/storage
+atom/.atom/compile-cache
+atom/.atom/dev
+atom/.atom/packages
+atom/.atom/blob-store
