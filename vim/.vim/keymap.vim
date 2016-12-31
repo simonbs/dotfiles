@@ -1,17 +1,28 @@
 let mapleader="," " Set leader key to comma
-nmap <leader>w :w!<cr> " Fast saving
+" Fast saving
+nmap <leader>w :w!<cr> 
 
-map <space> / " Start searching with space
-map <c-space> ? " Start backwards search with Ctrl-Space
+" Start searching with space
+map <space> / 
+" Start backwards search with Ctrl-Space
+map <c-space> ? 
 
-nmap <leader>T :enew<cr> " Open empty buffer (new tap)
-nmap <leader>l :bnext<CR> " Move to next buffer (next tab)
-nmap <leader>h :bprevious<CR> " Move to previous buffer (previous tab)
-nmap <leader>bq :bp <BAR> bd #<CR> " Close current buffer and move to previous (close tab)
-nmap <leader>bl :ls<CR> " Show all open buffers (tabs) and their status
-map <leader>pp :setlocal paste!<cr> " Toggle paste mode on and off
+" Open empty buffer (new tap)
+nmap <leader>T :enew<cr> 
+" Move to next buffer (next tab)
+nmap <leader>l :bnext<CR> 
+" Move to previous buffer (previous tab)
+nmap <leader>h :bprevious<CR> 
+" Close current buffer and move to previous (close tab)
+nmap <leader>bq :bp <BAR> bd #<CR> 
+" Show all open buffers (tabs) and their status
+nmap <leader>bl :ls<CR> 
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr> 
 
-nmap <silent> <C-D> :NERDTreeToggle<CR> " Show and hide NERDTree
-map <leader>r :NERDTreeFind<cr> " Find current file in NERDTree
+" Show and hide NERDTree
+nmap <silent> <C-D> :NERDTreeToggle<CR> 
+" Find current file in NERDTree
+map <leader>r :NERDTreeFind<cr> 
 
 
