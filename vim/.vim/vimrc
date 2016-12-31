@@ -4,12 +4,6 @@ if filereadable(expand(g:plugins_file_path))
   exe ':source ' . g:plugins_file_path
 endif
 
-" Set leader key to comma
-let mapleader=","
-
-" Fast saving
-nmap <leader>w :w!<cr>
-
 " Color scheme
 try
   colorscheme gruvbox
@@ -17,72 +11,32 @@ try
 catch
 endtry
 
-" Set to auto read when a file is changed from the outside
-set autoread
+set autoread " Set to auto read when a file is changed from the outside
+set mouse=nvi " Enable mouse
+set ruler " Show current position
+set cursorline " Highlight current line
+set hid " Hide buffer when it is abandoned
+set hidden " Allow buffers in background
 
-" Show and hide NERDTree.
-nmap <silent> <C-D> :NERDTreeToggle<CR>
-
-" Close vim if only window left is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTred()) | q | endif
-
-" Find current file in NERDTree. 
-map <leader>r :NERDTreeFind<cr>
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
-
-" Turn on the WiLd menu
-set wildmenu
-set wildmode=longest:full,full
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-  set wildignore+=.git\*,.hg\*,.svn\*
-else
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
-
-" Always show current position
-set ruler
-
-" Highlight current line
-set cursorline
-
-" Height of the command bar
-set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
+set backspace=eol,start,indent " Sane backspace
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
-set ignorecase
+set ignorecase " Ignore case when searching
+set smartcase " Be smart about casing
+set hlsearch " Highlight search results
+set incsearch " Make search act like in modern browsers
+set lazyredraw " Don't redraw while executing a macro (for performance)
+set magic " Turn on magic for regular expressions
+set mat=2 " How many tenths of a second to blink when matching brackets
+set showmatch " Show matching brackets with text indicator over them 
 
-" When searching try to be smart about cases 
-set smartcase
+set expandtab " Use spaces instead of tabs 
+set shiftwidth=2
+set tabstop=2
 
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch 
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw 
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch 
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
+set ai " Auto indent
+set si " Smart indent
+set wrap " Wrap lines
 
 " No annoying sound on errors
 set noerrorbells
@@ -90,56 +44,15 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Add a bit extra margin to the left
-set foldcolumn=1
-
 " Turn backup off
 set nobackup
 set nowb
 set noswapfile
 
-" Use spaces instead of tabs
-set expandtab
+set wildmenu " Turn on the WiLd menu
+set wildmode=longest:full,full
 
-" Be smart when using tabs ;)
-set smarttab
+set wildignore=*.o,*~,*.pyc " Ignore compiled files
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and macOS files.
 
-" 1 tab == 4 spaces
-set shiftwidth=2
-set tabstop=2
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" This allows buffers to be hidden if you've modified a buffer.
-" This is almost a must if you wish to use buffers in this way.
-set hidden
-
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+source '~/.vim/keymap.vim'
