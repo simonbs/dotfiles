@@ -28,6 +28,4 @@ let g:airline_powerline_fonts = 1 " Enable powerline fonts
 let NERDTreeShowHidden=1 " Show hidden files in NERDTree
 
 " Close vim if the only window left is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTred()) | q | endif
-
-
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
