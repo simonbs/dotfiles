@@ -11,3 +11,8 @@ atom/.atom/compile-cache
 atom/.atom/dev
 atom/.atom/packages
 atom/.atom/blob-store
+
+# vim
+vim/.vim/bundle
+vim/.vim/autoload
+vim/.vim/plugged
