@@ -55,4 +55,9 @@ set wildmode=longest:full,full
 set wildignore=*.o,*~,*.pyc " Ignore compiled files
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and macOS files.
 
-source '~/.vim/keymap.vim'
+" Load plugins
+let g:keymap_file_path = '~/.vim/keymap.vim'
+if filereadable(expand(g:keymap_file_path))
+  exe ':source ' . g:keymap_file_path
+endif
+
