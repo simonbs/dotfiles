@@ -20,3 +20,6 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 " Find current file in NERDTree
 map <leader>r :NERDTreeFind<cr> 
 
+" Clear search
+map <leader>h :nohlsearch<cr>
+
