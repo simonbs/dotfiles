@@ -12,6 +12,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'morhetz/gruvbox'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -26,6 +27,11 @@ let g:airline#extensions#tabline#fnamemod = ':t' " Show just the file name in ta
 let g:airline_powerline_fonts = 1 " Enable powerline fonts
 
 let NERDTreeShowHidden=1 " Show hidden files in NERDTree
+
+let g:NERDSpaceDelims = 1 " Add spaces after comments
+let g:NERDCompactSexyComs = 1 " Use compact syntax
+let g:NERDDefaultAlign = 'left' " Alignment
+let g:NERDCommentEmptyLines = 1 " Allow commenting empty lines
 
 " Close vim if the only window left is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
