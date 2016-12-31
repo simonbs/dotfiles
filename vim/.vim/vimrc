@@ -23,7 +23,6 @@ set whichwrap+=<,>,h,l
 
 set ignorecase " Ignore case when searching
 set smartcase " Be smart about casing
-set hlsearch " Highlight search results
 set incsearch " Make search act like in modern browsers
 set lazyredraw " Don't redraw while executing a macro (for performance)
 set magic " Turn on magic for regular expressions
