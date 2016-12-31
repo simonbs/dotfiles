@@ -2,11 +2,6 @@ let mapleader="," " Set leader key to comma
 " Fast saving
 nmap <leader>w :w!<cr> 
 
-" Start searching with space
-map <space> / 
-" Start backwards search with Ctrl-Space
-map <c-space> ? 
-
 " Open empty buffer (new tap)
 nmap <leader>T :enew<cr> 
 " Move to next buffer (next tab)
