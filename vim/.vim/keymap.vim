@@ -27,6 +27,12 @@ nmap <C-p> :Files<cr>
 " Clear search
 map <leader>s :nohlsearch<cr>
 
+" Move left and right with Option-Left and Option-Right
+nmap b b
+nmap f w
+imap b <C-o>b
+imap f <C-o>w
+
 " Bash like keys
 cmap <C-A> <Home>
 nmap <C-A> <Home>
