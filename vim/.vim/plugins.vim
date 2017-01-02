@@ -11,7 +11,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
