@@ -20,6 +20,13 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 " Find current file in NERDTree
 map <leader>r :NERDTreeFind<cr> 
 
+" fzf
+map <C-p> :Files<cr>
+nmap <C-p> :Files<cr>
+
+" Clear search
+map <leader>s :nohlsearch<cr>
+
 " Bash like keys
 cmap <C-A> <Home>
 nmap <C-A> <Home>
@@ -33,15 +40,4 @@ nmap <C-K> <C-U>
 cmap <C-K> <C-U>
 imap <C-K> <C-U>
 vmap <C-K> <C-U>
-cmap <C-P> <Up>
-nmap <C-P> <Up>
-imap <C-P> <Up>
-vmap <C-P> <Up>
-cmap <C-N> <Down>
-nmap <C-N> <Down>
-imap <C-N> <Down>
-vmap <C-N> <Down>
-
-" Clear search
-map <leader>s :nohlsearch<cr>
 

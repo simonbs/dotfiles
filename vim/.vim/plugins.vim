@@ -11,6 +11,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -25,6 +27,4 @@ let g:NERDSpaceDelims = 1 " Add spaces after comments
 let g:NERDCompactSexyComs = 1 " Use compact syntax
 let g:NERDDefaultAlign = 'left' " Alignment
 let g:NERDCommentEmptyLines = 1 " Allow commenting empty lines
-
-" Close vim if the only window left is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
