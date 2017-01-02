@@ -1,2 +1,8 @@
-alias xcopen="python ~/Developer/xcopen/xcopen.py"
-alias dog="pygmentize -g"
+# List tmux sessions
+alias tl="tmux ls"
+# Create tmux session with name
+alias tn="tmux new -s"
+# Attach to tmux session with name
+alias ta="tmux attach -t"
+# Kill tmux session with name
+alias tk="tmux kill-session -a"
