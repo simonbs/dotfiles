@@ -43,5 +43,5 @@ imap <C-N> <Down>
 vmap <C-N> <Down>
 
 " Clear search
-map <leader>h :nohlsearch<cr>
+map <leader>s :nohlsearch<cr>
 
