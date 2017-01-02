@@ -5,4 +5,4 @@ alias tn="tmux new -s"
 # Attach to tmux session with name
 alias ta="tmux attach -t"
 # Kill tmux session with name
-alias tk="tmux kill-session -a"
+alias tk="tmux kill-session -t"
