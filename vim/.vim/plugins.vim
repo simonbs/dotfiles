@@ -1,25 +1,19 @@
-" Load vundle
-if empty(glob('~/.vim/bundle/Vundle.vim'))
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  autocmd VimEnter * PluginInstall
+" Load vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-set nocompatible
-filetype off
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
+Plug 'ctrlpvim/ctrlp.vim'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'morhetz/gruvbox'
-Plugin 'ctrlpvim/ctrlp.vim'
-
-call vundle#end()
-filetype plugin indent on
-syntax enable
+call plug#end()
 
 set laststatus=2 " Make airline visible all the time
 let g:airline#extensions#tabline#enabled = 1 " Enable list of buffers (tabs) in airline
