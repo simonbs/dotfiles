@@ -2,6 +2,7 @@
 # "export ZSH=/Users/username/.oh-my-zsh" on OS X
 source ~/.zshrc.local
 
+# Set theme
 ZSH_THEME="kolo"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -22,6 +23,9 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # Add RVM to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Set default editor
+export EDITOR='vim'
 
 # Aliaes
 source ~/.aliases 2> /dev/null
