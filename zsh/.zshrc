@@ -20,10 +20,6 @@ export PATH="/usr/local/bin:$PATH"
 # https://github.com/yyuu/pyenv#homebrew-on-mac-os-x
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
-# pyenv-virtualenv
-# https://github.com/yyuu/pyenv-virtualenv
-# if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 # Add RVM to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
 
