@@ -50,6 +50,7 @@ set noswapfile
 
 set wildmenu " Turn on the WiLd menu
 set wildmode=longest:full,full
+set wildignorecase " Ignore case
 
 set wildignore=*.o,*~,*.pyc " Ignore compiled files
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and macOS files.
