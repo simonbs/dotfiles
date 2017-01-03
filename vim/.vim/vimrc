@@ -31,7 +31,8 @@ set showmatch " Show matching brackets with text indicator over them
 
 set expandtab " Use spaces instead of tabs 
 set shiftwidth=2
-set tabstop=2
+set tabstop=8
+set softtabstop=2
 
 set ai " Auto indent
 set si " Smart indent
@@ -56,6 +57,8 @@ set wildignore=*.o,*~,*.pyc " Ignore compiled files
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and macOS files.
 
 set clipboard=unnamed " Copy to clipboard
+
+autocmd FileType python setlocal shiftwidth=2 tabstop=2 " Indentation for Python
 
 " Load plugins
 let g:keymap_file_path = '~/.vim/keymap.vim'
