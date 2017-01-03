@@ -49,7 +49,7 @@ set nowb
 set noswapfile
 
 set wildmenu " Turn on the WiLd menu
-set wildmode=longest:full,full
+set wildmode=full
 set wildignorecase " Ignore case
 
 set wildignore=*.o,*~,*.pyc " Ignore compiled files

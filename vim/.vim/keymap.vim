@@ -21,8 +21,18 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 map <leader>r :NERDTreeFind<cr> 
 
 " fzf
-map <C-p> :Files<cr>
-nmap <C-p> :Files<cr>
+map <C-p>f :Files<cr>
+nmap <C-p>f :Files<cr>
+map <C-p>l :Lines<cr>
+nmap <C-p>l :Lines<cr>
+map <C-p>b :Buffers<cr>
+nmap <C-p>b :Buffers<cr>
+map <C-p>m :Maps<cr>
+nmap <C-p>m :Maps<cr>
+map <C-p>c :Commits<cr>
+nmap <C-p>c :Commits<cr>
+map <C-p>h :History<cr>
+nmap <C-p>h :History<cr>
 
 " Clear search
 map <leader>s :nohlsearch<cr>
