@@ -32,6 +32,8 @@ nmap b b
 nmap f w
 imap b <C-o>b
 imap f <C-o>w
+vmap b b
+vmap f w
 
 " Bash like keys
 cmap <C-A> <Home>
