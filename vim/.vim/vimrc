@@ -17,6 +17,8 @@ set ruler " Show current position
 set cursorline " Highlight current line
 set hid " Hide buffer when it is abandoned
 set hidden " Allow buffers in background
+set number " Show line numbers
+set numberwidth=4 " Gutter width
 
 set backspace=eol,start,indent " Sane backspace
 set whichwrap+=<,>,h,l
