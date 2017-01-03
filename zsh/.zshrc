@@ -36,4 +36,6 @@ source ~/.aliases 2> /dev/null
 
 # Setup nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# If commented, nvm should be sourced manually before used.
+# Sourcing nvm on shell startup can be slow, therefore this can be commented.
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
