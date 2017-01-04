@@ -1,6 +1,10 @@
 let mapleader="," " Set leader key to comma
 " Fast saving
-nmap <leader>w :w!<cr> 
+nmap <leader>w :w!<cr>
+" Edit file with file path
+nmap <leader>e :e<cr>
+" Open file with fzf
+nmap <leader>o :Files<cr>
 
 " Open empty buffer (new tap)
 nmap <leader>T :enew<cr> 
@@ -34,6 +38,12 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
+
+" Enter normal mode from insert mode with jj
+inoremap jj <ESC>
+
+" Start Ack (using ag, set in plugins.vim)
+nmap <leader>a :Ack<space>
 
 " Show and hide NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR> 
