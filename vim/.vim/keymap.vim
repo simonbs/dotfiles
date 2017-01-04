@@ -15,6 +15,14 @@ nmap <leader>bl :ls<CR>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr> 
 
+" Make search tolerable as described in 
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+nnoremap / /\v
+vnoremap / /\v
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
+
 " Show and hide NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR> 
 " Find current file in NERDTree

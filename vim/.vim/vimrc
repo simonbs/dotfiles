@@ -24,13 +24,23 @@ set numberwidth=4 " Gutter width
 set backspace=eol,start,indent " Sane backspace
 set whichwrap+=<,>,h,l
 
-set ignorecase " Ignore case when searching
-set smartcase " Be smart about casing
-set incsearch " Make search act like in modern browsers
 set lazyredraw " Don't redraw while executing a macro (for performance)
 set magic " Turn on magic for regular expressions
 set mat=2 " How many tenths of a second to blink when matching brackets
 set showmatch " Show matching brackets with text indicator over them 
+
+" Make search tolerable
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 set expandtab " Use spaces instead of tabs 
 set shiftwidth=2
