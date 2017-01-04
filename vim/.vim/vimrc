@@ -29,18 +29,14 @@ set magic " Turn on magic for regular expressions
 set mat=2 " How many tenths of a second to blink when matching brackets
 set showmatch " Show matching brackets with text indicator over them 
 
-" Make search tolerable
-nnoremap / /\v
-vnoremap / /\v
+" Make search tolerable as described in
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 set ignorecase
 set smartcase
 set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
 
 set expandtab " Use spaces instead of tabs 
 set shiftwidth=2
@@ -79,6 +75,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and ma
 set clipboard=unnamed " Copy to clipboard
 
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 " Indentation for Python
+au FocusLost * :wa " Save when focus is lost
 
 " Load plugins
 let g:keymap_file_path = '~/.vim/keymap.vim'
