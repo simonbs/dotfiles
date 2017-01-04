@@ -2,11 +2,11 @@ let mapleader="," " Set leader key to comma
 " Fast saving
 nmap <leader>w :w!<cr>
 " Edit file with file path
-nmap <leader>e :e<cr>
+nmap <leader>e :e<space>
 " Open file with fzf
 nmap <leader>o :Files<cr>
 
-" Open empty buffer (new tap)
+"'christoomey/vim-tmux-navigator' Open empty buffer (new tap)
 nmap <leader>T :enew<cr> 
 " Move to next buffer (next tab)
 nmap <leader>l :bnext<CR> 
