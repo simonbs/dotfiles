@@ -16,3 +16,4 @@ atom/.atom/blob-store
 vim/.vim/bundle
 vim/.vim/autoload
 vim/.vim/plugged
+vim/.vim/undo-dir

@@ -11,6 +11,7 @@ try
 catch
 endtry
 
+set nocompatible " We don't need to be vi compatible
 set autoread " Set to auto read when a file is changed from the outside
 set mouse=nvi " Enable mouse
 set ruler " Show current position
@@ -50,6 +51,13 @@ set tm=500
 set nobackup
 set nowb
 set noswapfile
+
+" Let's save undo info!
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
 
 set wildmenu " Turn on the WiLd menu
 set wildmode=full
