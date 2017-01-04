@@ -50,6 +50,11 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 " Find current file in NERDTree
 map <leader>r :NERDTreeFind<cr> 
 
+" Keybindingis for expanding regions
+" https://github.com/terryma/vim-expand-region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 " fzf
 map <C-p>f :Files<cr>
 nmap <C-p>f :Files<cr>
