@@ -23,6 +23,18 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
+" Hard mode. Use h, j, k and l for navigation
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
 " Show and hide NERDTree
 nmap <silent> <C-D> :NERDTreeToggle<CR> 
 " Find current file in NERDTree
