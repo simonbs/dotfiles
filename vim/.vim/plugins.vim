@@ -14,6 +14,7 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -32,7 +33,7 @@ let g:NERDDefaultAlign = 'left' " Alignment
 let g:NERDCommentEmptyLines = 1 " Allow commenting empty lines
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Use ag over ack for ack.vim
+" Use ag over ack Pfor ack.vim
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif

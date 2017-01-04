@@ -17,7 +17,7 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers (tabs) and their status
 nmap <leader>bl :ls<CR> 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr> 
+set pastetoggle=<leader>p
 
 " Make search tolerable as described in 
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
@@ -63,6 +63,8 @@ map <C-p>c :Commits<cr>
 nmap <C-p>c :Commits<cr>
 map <C-p>h :History<cr>
 nmap <C-p>h :History<cr>
+map <C-p>g :GFiles<cr>
+nmap <C-p>g :GFiles<cr>
 
 " Clear search
 map <leader>s :nohlsearch<cr>
