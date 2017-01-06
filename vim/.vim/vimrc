@@ -29,6 +29,10 @@ set magic " Turn on magic for regular expressions
 set mat=2 " How many tenths of a second to blink when matching brackets
 set showmatch " Show matching brackets with text indicator over them 
 
+" Show white space characters
+set list
+set listchars=tab:▸\ ,eol:¬
+
 " Make search tolerable as described in
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
 set ignorecase
