@@ -47,9 +47,10 @@ set shiftwidth=2
 set tabstop=8
 set softtabstop=2
 
-set ai " Auto indent
-set si " Smart indent
+set autoindent " Auto indent
+set smartindent " Smart indent
 set wrap " Wrap lines
+set cindent
 
 " No annoying sound on errors
 set noerrorbells
