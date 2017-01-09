@@ -66,9 +66,10 @@ nmap <C-p>g :GFiles<cr>
 " Clear search
 map <leader>s :nohlsearch<cr>
 
-" Go to next and previous buffers
+" Go to next and previous buffers as well as the alternate buffer.
 map <leader>bn :bnext<cr>
 map <leader>bp :bprevious<cr>
+map <leader>ba :b#<cr>
 
 " Move left and right with Option-Left and Option-Right
 nmap b b
