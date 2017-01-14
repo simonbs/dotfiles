@@ -80,7 +80,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and ma
 set clipboard=unnamed " Copy to clipboard
 
 autocmd FileType python setlocal shiftwidth=2 tabstop=2 " Indentation for Python
-autocmd FileType javacsript setlocal shiftwidth=2 tabstop=2 " Indentation for JavaScript
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 " Indentation for JavaScript
 
 au FocusLost * :wa " Save when focus is lost
 
