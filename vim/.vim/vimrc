@@ -71,7 +71,7 @@ set undodir=~/.vim/undo-dir
 set undofile
 
 set wildmenu " Turn on the WiLd menu
-set wildmode=full
+set wildmode=longest:full,full
 set wildignorecase " Ignore case
 
 set wildignore=*.o,*~,*.pyc " Ignore compiled files
@@ -79,8 +79,8 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and ma
 
 set clipboard=unnamed " Copy to clipboard
 
-autocmd FileType python setlocal shiftwidth=2 tabstop=2 " Indentation for Python
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 " Indentation for JavaScript
+autocmd BufRead,BufNewFile *.py setlocal shiftwidth=2 tabstop=2 " Indentation for Python
+autocmd BufRead,BufNewFile *.js setlocal shiftwidth=2 tabstop=2 " Indentation for JavaScript
 
 au FocusLost * :wa " Save when focus is lost
 
