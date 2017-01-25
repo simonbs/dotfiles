@@ -31,9 +31,6 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" Enter normal mode from insert mode with jj
-inoremap jj <ESC>
-
 " Start Ack (using ag, set in plugins.vim)
 nmap <leader>a :Ack<space>
 
