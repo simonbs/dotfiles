@@ -16,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'terryma/vim-expand-region'
+Plug 'keith/swift.vim' 
 
 call plug#end()
 
