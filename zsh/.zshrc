@@ -39,3 +39,9 @@ export NVM_DIR="$HOME/.nvm"
 # If commented, nvm should be sourced manually before used.
 # Sourcing nvm on shell startup can be slow, therefore this can be commented.
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
