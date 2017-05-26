@@ -8,3 +8,8 @@ alias ta="tmux attach -t"
 alias tk="tmux kill-session -t"
 # Open Xcode project or workspace
 alias xcopen="python ~/Developer/scripts/xcopen.py"
+# Start PostgreSQL
+alias startpostgresql="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+# Stop PostgreSQL
+alias stoppostgresql="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+
