@@ -34,6 +34,12 @@ source ~/.aliases 2> /dev/null
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Setup z
+# https://github.com/rupa/z
+if [ -f /usr/local/etc/profile.d/z.sh ]; then
+  . /usr/local/etc/profile.d/z.sh
+fi
+
 # Setup nvm
 export NVM_DIR="$HOME/.nvm"
 # If commented, nvm should be sourced manually before used.
