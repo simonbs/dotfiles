@@ -55,3 +55,7 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Allow tmuxinator to set window names without anyone else overriding them.
+# https://github.com/tmuxinator/tmuxinator
+export DISABLE_AUTO_TITLE=true
