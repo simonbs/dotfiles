@@ -30,6 +30,10 @@ export EDITOR='vim'
 # Aliaes
 source ~/.aliases 2> /dev/null
 
+# Completion for tmuxinator
+# https://github.com/tmuxinator/tmuxinator
+source ~/Developer/dotfiles/tmuxinator/tmuxinator-completion.sh
+
 # Setup fzf
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
