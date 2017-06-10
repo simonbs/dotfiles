@@ -17,3 +17,5 @@ vim/.vim/bundle
 vim/.vim/autoload
 vim/.vim/plugged
 vim/.vim/undo-dir
+vim/.vim/.netrwhist
+
