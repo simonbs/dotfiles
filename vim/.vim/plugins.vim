@@ -24,8 +24,6 @@ filetype plugin indent on
 set laststatus=2 " Make airline visible all the time
 let g:airline_powerline_fonts = 1 " Enable powerline fonts
 
-let NERDTreeShowHidden=1 " Show hidden files in NERDTree
-
 let g:NERDSpaceDelims = 1 " Add spaces after comments
 let g:NERDCompactSexyComs = 1 " Use compact syntax
 let g:NERDDefaultAlign = 'left' " Alignment
