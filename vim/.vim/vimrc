@@ -84,6 +84,8 @@ autocmd BufRead,BufNewFile *.js setlocal shiftwidth=2 tabstop=2 " Indentation fo
 
 au FocusLost * :wa " Save when focus is lost
 
+au BufReadPost Jenkinsfile set syntax=groovy " Groovy syntax for Jenkinsfile
+
 " Load plugins
 let g:keymap_file_path = '~/.vim/keymap.vim'
 if filereadable(expand(g:keymap_file_path))
