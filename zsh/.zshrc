@@ -27,8 +27,13 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Set default editor
 export EDITOR='vim'
 
-# Aliaes
+# Aliases
 source ~/.aliases 2> /dev/null
+
+# Local aliases
+if [ -f ~/.aliases.local ]; then
+  source ~/.aliases.local 2> /dev/null
+fi
 
 # Completion for tmuxinator
 # https://github.com/tmuxinator/tmuxinator
