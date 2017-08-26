@@ -79,8 +79,8 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store " Ignore subversion and ma
 
 set clipboard=unnamed " Copy to clipboard
 
-autocmd BufRead,BufNewFile *.py setlocal shiftwidth=2 tabstop=2 " Indentation for Python
-autocmd BufRead,BufNewFile *.js setlocal shiftwidth=2 tabstop=2 " Indentation for JavaScript
+autocmd BufRead,BufNewFile *.py setlocal shiftwidth=2 tabstop=2 softtabstop=2 " Indentation for Python
+autocmd BufRead,BufNewFile *.js setlocal shiftwidth=2 tabstop=2 softtabstop=2" Indentation for JavaScript
 
 au FocusLost * :wa " Save when focus is lost
 
