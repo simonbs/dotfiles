@@ -129,11 +129,11 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Add virtual env to PS1
 __pyenv_version_ps1() {
-    local ret=$?;
-    if [ -n "${PYENV_VIRTUAL_ENV}" ]; then
-        echo -n "(${PYENV_VIRTUAL_ENV##*/}) "
-    fi
-    return $?
+  local ret=$?;
+  if [ -n "${PYENV_VIRTUAL_ENV}" ]; then
+      echo -n "(${PYENV_VIRTUAL_ENV##*/}) "
+  fi
+  return $?
 }
 PS1="\$(__pyenv_version_ps1)${PS1}"
 
