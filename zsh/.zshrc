@@ -47,6 +47,51 @@ source ~/Developer/dotfiles/tmuxinator/tmuxinator-completion.sh
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# cd to selected directory with fzf
+# https://github.com/junegunn/fzf/wiki/examples
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# Open selected file with fzf
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+# https://github.com/junegunn/fzf/wiki/examples
+fo() {
+  local out file key
+  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
+# Checkout git branch with fzf
+# https://github.com/junegunn/fzf/wiki/examples
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+# Show git commits with fzf
+# https://github.com/junegunn/fzf/wiki/examples
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
 # Setup z
 # https://github.com/rupa/z
 if [ -f /usr/local/etc/profile.d/z.sh ]; then
@@ -65,6 +110,16 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+
+# z with fzf
+# Like normal z when used with arguments but displays an fzf prompt when used without
+# https://github.com/junegunn/fzf/wiki/examples
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
+}
+
 # Allow tmuxinator to set window names without anyone else overriding them.
 # https://github.com/tmuxinator/tmuxinator
 export DISABLE_AUTO_TITLE=true
@@ -81,3 +136,4 @@ __pyenv_version_ps1() {
     return $?
 }
 PS1="\$(__pyenv_version_ps1)${PS1}"
+
