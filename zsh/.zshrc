@@ -110,7 +110,6 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-
 # z with fzf
 # Like normal z when used with arguments but displays an fzf prompt when used without
 # https://github.com/junegunn/fzf/wiki/examples
