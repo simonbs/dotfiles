@@ -1,3 +1,7 @@
+# Specifies locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # .zshrc.local should specify path to ZSH, e.g.
 # "export ZSH=/Users/username/.oh-my-zsh" on OS X
 source ~/.zshrc.local
@@ -135,4 +139,7 @@ __pyenv_version_ps1() {
   return $?
 }
 PS1="\$(__pyenv_version_ps1)${PS1}"
+
+# shppa
+export PATH=~/Developer/shpscripts:$PATH
 

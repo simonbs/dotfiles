@@ -51,9 +51,9 @@
   # Pull using rebase
   p = pull --rebase
 [core]
-	excludefiles = /Users/simonbs/.gitignore_global
-	excludesfile = /Users/simonbs/.gitignore_global
-	editor = vim
+  excludefiles = /Users/simonbs/.gitignore_global
+  excludesfile = /Users/simonbs/.gitignore_global
+  editor = vim
 [diff]
   tool = Kaleidoscope
 [difftool "Kaleidoscope"]
