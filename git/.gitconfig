@@ -1,6 +1,6 @@
 [user]
-  email = mail@simonbs.dk
-  name = Simon Støvring
+	email = mail@simonbs.dk
+	name = Simon Støvring
   signingkey = 30FC5A50FD993021
 [alias]
   # List commits in short form, with colors and branch/tag annotations
