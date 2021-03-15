@@ -16,7 +16,7 @@ ZSH_THEME="kolo"
 plugins=(git)
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-source $ZSH/oh-my-zsh.sh
+source ~/.oh-my-zsh/oh-my-zsh.sh
 
 # /usr/local/bin takes precedence over /usr/bin
 export PATH="/usr/local/bin:$PATH"
