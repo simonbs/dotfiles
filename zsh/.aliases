@@ -15,4 +15,4 @@ function killport() {
   kill $(lsof -iTCP -sTCP:LISTEN -n -P | grep $1 | awk '{print $2}')
 }
 # Rip a video with ffmpeg
-alias rip="~/Developer/dotfiles/rip-with-ffmpeg.sh $@"
+alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
