@@ -140,6 +140,3 @@ __pyenv_version_ps1() {
 }
 PS1="\$(__pyenv_version_ps1)${PS1}"
 
-# shppa
-export PATH=~/Developer/shpscripts:$PATH
-
