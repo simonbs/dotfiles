@@ -4,7 +4,9 @@ export LANG=en_US.UTF-8
 
 # .zshrc.local should specify path to ZSH, e.g.
 # "export ZSH=/Users/username/.oh-my-zsh" on OS X
-source ~/.zshrc.local
+if [[ -f "~/.zshrc.local" ]]; then
+  source ~/.zshrc.local
+fi
 
 # Set theme
 ZSH_THEME="kolo"
