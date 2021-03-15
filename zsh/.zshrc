@@ -35,7 +35,7 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Set default editor
-export EDITOR='vim'
+export EDITOR="nova"
 
 # Aliases
 source ~/.aliases 2> /dev/null
