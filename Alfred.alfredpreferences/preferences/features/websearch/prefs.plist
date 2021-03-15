@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>3CCD8866-4C52-4316-8FA0-5133F383567D</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>giphy</string>
+			<key>spaces</key>
+			<string>-</string>
+			<key>text</key>
+			<string>Search Giphy for '{query}'</string>
+			<key>url</key>
+			<string>http://giphy.com/search/{query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>734565D4-8D7D-43AA-9B75-45750D407E91</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>foursquare</string>
+			<key>text</key>
+			<string>Foursquare</string>
+			<key>url</key>
+			<string>https://foursquare.com/explore?mode=url&amp;near=Copenhagen&amp;nearGeoId=72057594040546361&amp;q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>8D022FA1-8B93-46C9-98D6-A2641C1E533C</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>github</string>
+			<key>text</key>
+			<string>Search Github for '{query}'</string>
+			<key>url</key>
+			<string>https://github.com/search?utf8=✓&amp;q={query}&amp;type=Repositories</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>AF6879F1-D39F-47E1-BEA4-198667B6A033</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>dev</string>
+			<key>text</key>
+			<string>Search Apple Developer for '{query}'</string>
+			<key>url</key>
+			<string>https://developer.apple.com/search/?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>CAD1DF1C-5237-4D06-BD6F-796098307305</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>githubc</string>
+			<key>text</key>
+			<string>Search GitHub code for '{query}'</string>
+			<key>url</key>
+			<string>https://github.com/search?utf8=✓&amp;q={query}&amp;type=Code</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>E62209CC-9E3E-4E5B-96CD-2E0D63474129</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>apple</string>
+			<key>spaces</key>
+			<string>-</string>
+			<key>text</key>
+			<string>Search Apple for '{query}'</string>
+			<key>url</key>
+			<string>http://www.apple.com/dk/search/{query}?sel=accessories</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>FCC151FA-DA7A-41D3-A766-256531ACA457</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>bit</string>
+			<key>text</key>
+			<string>Search Bitbucket for '{query}'</string>
+			<key>url</key>
+			<string>https://bitbucket.org/repo/all?name={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
