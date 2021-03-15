@@ -132,6 +132,10 @@ export DISABLE_AUTO_TITLE=true
 # Recommended setting for pyenv-virtualenv as prompt changing will be removed from future releases.
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
+# Configures GPG tty
+# https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
+export GPG_TTY=$(tty)
+
 # Add virtual env to PS1
 __pyenv_version_ps1() {
   local ret=$?;
