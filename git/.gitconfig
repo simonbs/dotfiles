@@ -52,8 +52,7 @@
   # Pull using rebase
   p = pull --rebase
 [core]
-  excludefiles = /Users/simonbs/.gitignore_global
-  excludesfile = /Users/simonbs/.gitignore_global
+  excludesfile = ~/.gitignore_global
   editor = vim
 [difftool]
   prompt = false
