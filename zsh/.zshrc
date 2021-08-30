@@ -25,7 +25,9 @@ export PATH="/usr/local/bin:$PATH"
 
 # pyenv
 # https://github.com/pyenv/pyenv
-if which pyenv > /dev/null; then; eval "$(pyenv init -)"; fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if which pyenv > /dev/null; then; eval "$(pyenv init --path)"; fi
 
 # pyenv-virtualenv
 # https://github.com/pyenv/pyenv-virtualenv
@@ -33,6 +35,9 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 
 # Add RVM to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Add go to PATH
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # Set default editor
 export EDITOR="nova"
