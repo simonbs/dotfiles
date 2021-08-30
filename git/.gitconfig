@@ -62,4 +62,4 @@
   required = true
   clean = git-lfs clean -- %f
 [commit]
-	gpgsign = true
+  gpgsign = true
