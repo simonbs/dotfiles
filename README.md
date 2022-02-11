@@ -16,7 +16,7 @@ This secton contains notes on setting up specfic tools.
 
 #### gnupg
 
-Used for [signing git commits](https://docs.github.com/en/github/authenticating-to-github/signing-commits). In gnupg and pinentry-mac must be installed with Homebrew.
+Used for [signing git commits](https://docs.github.com/en/github/authenticating-to-github/signing-commits). gnupg and pinentry-mac must be installed with Homebrew.
 
 ```bash
 brew install gnupg pinentry-mac
