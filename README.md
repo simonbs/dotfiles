@@ -28,4 +28,14 @@ Used for [signing git commits](https://docs.github.com/en/github/authenticating-
 brew install gnupg pinentry-mac
 ```
 
-Make sure to stow both the git and gnupg folders so all the settings are in place.
+Make sure to stow both the git and gnupg folders so all the settings are in place. Then import the GPG private key.
+
+```bash
+gpg --import gnupg-private-key.asc
+```
+
+Verify that it's imported by running the following command.
+
+```bash
+gpg --list-keys
+```
