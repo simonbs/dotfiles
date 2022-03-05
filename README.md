@@ -39,3 +39,15 @@ Verify that it's imported by running the following command.
 ```bash
 gpg --list-keys
 ```
+
+#### iTerm2
+
+iTerm2 can be [downloaded here](https://iterm2.com). Follow the steps below to use the settings stored in this repository with iTerm2.
+
+1. Open Preferences (CMD + ,)
+2. Select General.
+3. Select Preferences.
+4. Check "Load preferences from a custom folder or URL" and select the dotfiles folder as shown in the screenshot below.
+5. iTerm2 may have saved the local settings in the plist file. Quit iTerm2, revert the changes in the dotfiles repository and open iTerm2 again.
+
+<img width="600" src="https://raw.githubusercontent.com/simonbs/dotfiles/master/iterm2preferences.png"/>
