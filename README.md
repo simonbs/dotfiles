@@ -8,8 +8,6 @@ Dotfiles are stored relative to the home directory, `~`. Each directory in the r
 
 To stow a directory, run `stow` followed by the directory name, e.g. `stow git`. This will put the dotfiles in the previous directory (`cd ..`). To specify a target directory, use `stow -t ~/ git`.
 
-Run `./stowall.sh` to stow all directories and put them in the home directory.
-
 ### Notes
 
 This secton contains notes on setting up specfic tools.
