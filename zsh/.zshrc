@@ -36,9 +36,6 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 # Add RVM to PATH
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# Add go to PATH
-export PATH=$PATH:$(go env GOPATH)/bin
-
 # Set default editor
 export EDITOR="nova"
 
