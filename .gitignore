@@ -19,3 +19,7 @@ vim/.vim/plugged
 vim/.vim/undo-dir
 vim/.vim/.netrwhist
 
+# gpg
+gnupg/.gnupg/pubring.kbx
+gnupg/.gnupg/private-keys-v1.d
+gnupg/.gnupg/trustdb.gpg
