@@ -33,8 +33,9 @@ if which pyenv > /dev/null; then; eval "$(pyenv init --path)"; fi
 # https://github.com/pyenv/pyenv-virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# Add RVM to PATH
-export PATH="$PATH:$HOME/.rvm/bin"
+# Setup rbenv
+# https://github.com/rbenv/rbenv
+eval "$(rbenv init - zsh)"
 
 # Set default editor
 export EDITOR="nova"
