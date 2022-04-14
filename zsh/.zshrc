@@ -144,6 +144,10 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
 
+function fix_status_bar() {
+  ( set -x; xcrun simctl status_bar "$1" override --time 9:41 --dataNetwork wifi --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100 )
+}
+
 # Add virtual env to PS1
 __pyenv_version_ps1() {
   local ret=$?;
