@@ -113,6 +113,7 @@ fi
 
 # Setup nvm
 export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # If commented, nvm should be sourced manually before used.
 # Sourcing nvm on shell startup can be slow, therefore this can be commented.
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
