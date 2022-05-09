@@ -63,5 +63,7 @@
   clean = git-lfs clean -- %f
 [commit]
   gpgsign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
 [init]
 	defaultBranch = main
