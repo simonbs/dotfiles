@@ -63,3 +63,5 @@
   clean = git-lfs clean -- %f
 [commit]
   gpgsign = true
+[init]
+	defaultBranch = main
