@@ -8,6 +8,8 @@
 	<integer>2</integer>
 	<key>AllowClipboardAccess</key>
 	<true/>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>CopySelection</key>
 	<false/>
 	<key>Custom Color Presets</key>
