@@ -23,20 +23,6 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 # /usr/local/bin takes precedence over /usr/bin
 export PATH="/usr/local/bin:$PATH"
 
-# pyenv
-# https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if which pyenv > /dev/null; then; eval "$(pyenv init --path)"; fi
-
-# pyenv-virtualenv
-# https://github.com/pyenv/pyenv-virtualenv
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# Setup rbenv
-# https://github.com/rbenv/rbenv
-eval "$(rbenv init - zsh)"
-
 # Set default editor
 export EDITOR="nova"
 
@@ -111,12 +97,9 @@ if [ -f /usr/local/etc/profile.d/z.sh ]; then
   . /usr/local/etc/profile.d/z.sh
 fi
 
-# Setup nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# If commented, nvm should be sourced manually before used.
-# Sourcing nvm on shell startup can be slow, therefore this can be commented.
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Setup asdf
+# https://asdf-vm.com
+. "$HOME/.asdf/asdf.sh"
 
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -137,9 +120,6 @@ z() {
 # https://github.com/tmuxinator/tmuxinator
 export DISABLE_AUTO_TITLE=true
 
-# Recommended setting for pyenv-virtualenv as prompt changing will be removed from future releases.
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
 # Configures GPG tty
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
 export GPG_TTY=$(tty)
@@ -147,15 +127,5 @@ export GPG_TTY=$(tty)
 function fix_status_bar() {
   ( set -x; xcrun simctl status_bar "$1" override --time 9:41 --dataNetwork wifi --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100 )
 }
-
-# Add virtual env to PS1
-__pyenv_version_ps1() {
-  local ret=$?;
-  if [ -n "${PYENV_VIRTUAL_ENV}" ]; then
-      echo -n "(${PYENV_VIRTUAL_ENV##*/}) "
-  fi
-  return $?
-}
-PS1="\$(__pyenv_version_ps1)${PS1}"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
