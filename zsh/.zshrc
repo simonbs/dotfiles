@@ -34,10 +34,6 @@ if [ -f ~/.aliases.local ]; then
   source ~/.aliases.local 2> /dev/null
 fi
 
-# Completion for tmuxinator
-# https://github.com/tmuxinator/tmuxinator
-source ~/Developer/dotfiles/tmuxinator/tmuxinator-completion.sh
-
 # Setup fzf
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -115,10 +111,6 @@ z() {
   [ $# -gt 0 ] && _z "$*" && return
   cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
 }
-
-# Allow tmuxinator to set window names without anyone else overriding them.
-# https://github.com/tmuxinator/tmuxinator
-export DISABLE_AUTO_TITLE=true
 
 # Configures GPG tty
 # https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html

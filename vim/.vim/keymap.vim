@@ -6,8 +6,6 @@ nmap <leader>e :e<space>
 " Open file with fzf
 nmap <leader>o :Files<cr>
 
-"'christoomey/vim-tmux-navigator' Open empty buffer (new tap)
-nmap <leader>T :enew<cr> 
 " Toggle paste mode on and off
 set pastetoggle=<leader>p
 

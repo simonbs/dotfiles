@@ -1,11 +1,3 @@
-# List tmux sessions
-alias tl="tmux ls"
-# Create tmux session with name
-alias tn="tmux new -s"
-# Attach to tmux session with name
-alias ta="tmux attach -t"
-# Kill tmux session with name
-alias tk="tmux kill-session -t"
 # Start PostgreSQL
 alias startpostgresql="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 # Stop PostgreSQL
