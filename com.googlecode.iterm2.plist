@@ -920,6 +920,17 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x74-0x180000-0x11</key>
+		<dict>
+			<key>Action</key>
+			<integer>61</integer>
+			<key>Label</key>
+			<string></string>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>1</integer>
+		</dict>
 		<key>0x7f-0x100000</key>
 		<dict>
 			<key>Action</key>
