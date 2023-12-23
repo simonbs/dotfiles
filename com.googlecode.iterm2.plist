@@ -1294,6 +1294,8 @@
 			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
+			<key>Custom Tab Title</key>
+			<string></string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1755,6 +1757,19 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Title Components</key>
+			<integer>2</integer>
+			<key>Title Function</key>
+			<array>
+				<dict>
+					<key>value</key>
+					<string>George's Title Algorithm</string>
+				</dict>
+				<dict>
+					<key>value</key>
+					<string>com.iterm2.example.georges-title-algorithm</string>
+				</dict>
+			</array>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -1763,6 +1778,8 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Custom Tab Title</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
