@@ -67,3 +67,5 @@
 	program = /opt/homebrew/bin/gpg
 [init]
 	defaultBranch = main
+[pager]
+	branch = false
