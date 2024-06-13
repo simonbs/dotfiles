@@ -40,6 +40,10 @@ Verify that it's imported by running the following command.
 gpg --list-keys
 ```
 
+#### Powerlevel10k
+
+Make sure to install the recommended MesloLGS fonts for icons to show up properly. [Instructions on installing the fonts can be found here](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#fonts).
+
 #### iTerm2
 
 iTerm2 can be [downloaded here](https://iterm2.com). Follow the steps below to use the settings stored in this repository with iTerm2.
