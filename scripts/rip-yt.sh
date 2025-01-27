@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if yt-dlp is installed
+if ! command -v yt-dlp &> /dev/null; then
+  echo "yt-dlp is not installed. Install it first."
+  exit 1
+fi
+
 if [ $# -eq 0 ]; then
   echo "Usage: $0 <URL>"
   exit 1
