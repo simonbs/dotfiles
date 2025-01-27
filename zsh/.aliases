@@ -8,3 +8,4 @@ function killport() {
 }
 # Rip a video with ffmpeg
 alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
+alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
