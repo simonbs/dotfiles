@@ -2,7 +2,7 @@
 
 # Check if yt-dlp is installed
 if ! command -v yt-dlp &> /dev/null; then
-  echo "yt-dlp is not installed. Install it first."
+  echo "yt-dlp is not installed. Install it first: https://github.com/yt-dlp/yt-dlp"
   exit 1
 fi
 
