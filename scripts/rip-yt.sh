@@ -6,10 +6,24 @@ if ! command -v yt-dlp &> /dev/null; then
   exit 1
 fi
 
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 <URL>"
+# Function to display usage
+usage() {
+  echo "Usage: $(basename "$0") <URL>"
+  echo
+  echo "Description:"
+  echo "  Downloads the best available MP4 video using yt-dlp."
+  echo
+  echo "Examples:"
+  echo "  $(basename "$0") https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   exit 1
+}
+
+# Check if URL is provided
+if [ $# -eq 0 ]; then
+  usage
 fi
+
+URL="$1"
 
 yt-dlp -f "bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]" \
   --merge-output-format mp4 \
