@@ -6,3 +6,7 @@ cursor-style = block
 shell-integration-features = no-cursor
 cursor-color = #e6e6e6
 cursor-text = #1e1f29
+macos-icon = custom-style
+macos-icon-frame = aluminum
+macos-icon-ghost-color = #52FC85
+macos-icon-screen-color = #0F2213
