@@ -55,3 +55,12 @@ iTerm2 can be [downloaded here](https://iterm2.com). Follow the steps below to u
 5. iTerm2 may have saved the local settings in the plist file. Quit iTerm2, revert the changes in the dotfiles repository and open iTerm2 again.
 
 <img width="600" src="https://raw.githubusercontent.com/simonbs/dotfiles/master/iterm2preferences.png"/>
+
+#### Ghostty
+
+Ghostty can be [downloaded here](https://ghostty.org). The preferences are stored in `~/Library/Application Support/com.mitchellh.ghostty`, so they should be stowewd like this:
+
+```bash
+stow -t /Users/simonbs/Library/Application\ Support/com.mitchellh.ghostty ghostty
+```
+
