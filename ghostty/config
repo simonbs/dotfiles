@@ -1,0 +1,8 @@
+theme = Dracula
+font-family = "JetBrains Mono Regular"
+font-family = "Fira Code Retina"
+font-size = 16
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-color = #e6e6e6
+cursor-text = #1e1f29
