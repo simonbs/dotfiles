@@ -10,3 +10,4 @@ macos-icon = custom-style
 macos-icon-frame = aluminum
 macos-icon-ghost-color = #52FC85
 macos-icon-screen-color = #0F2213
+window-padding-x = 2,0
