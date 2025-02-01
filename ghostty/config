@@ -11,3 +11,4 @@ macos-icon-frame = aluminum
 macos-icon-ghost-color = #52fc85
 macos-icon-screen-color = #0f2213
 window-padding-x = 2,0
+window-inherit-working-directory = true
