@@ -104,6 +104,10 @@ if [ -f /usr/local/etc/profile.d/z.sh ]; then
   . /usr/local/etc/profile.d/z.sh
 fi
 
+# Setup asdf
+# https://asdf-vm.com
+. "$HOME/.asdf/asdf.sh"
+
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
