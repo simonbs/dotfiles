@@ -18,7 +18,7 @@ To stow a directory, run `stow` followed by the directory name, e.g. `stow git`.
 
 ### Notes
 
-This secton contains notes on setting up specfic tools.
+This section contains notes on setting up specific tools.
 
 #### gnupg
 
