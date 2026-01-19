@@ -2,6 +2,8 @@ model = "gpt-5.2-codex"
 approval_policy = "never"
 sandbox_mode = "workspace-write"
 model_reasoning_effort = "high"
+
+[sandbox_workspace_write]
 network_access = true
 
 [features]
