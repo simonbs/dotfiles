@@ -1,0 +1,10 @@
+model = "gpt-5.2-codex"
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "high"
+network_access = true
+
+[features]
+unified_exec = true
+shell_snapshot = true
+web_search_request = true

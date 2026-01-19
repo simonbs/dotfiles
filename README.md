@@ -64,3 +64,10 @@ Ghostty can be [downloaded here](https://ghostty.org). The preferences are store
 stow -t /Users/simonbs/Library/Application\ Support/com.mitchellh.ghostty ghostty
 ```
 
+#### Codex
+
+Codex configuration can be stowed like this:
+
+```bash
+stow -t ~/.codex codex
+```
