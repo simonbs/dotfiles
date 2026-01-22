@@ -1,6 +1,6 @@
 model = "gpt-5.2-codex"
 approval_policy = "never"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 model_reasoning_effort = "high"
 
 [sandbox_workspace_write]
