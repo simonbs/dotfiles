@@ -2,10 +2,23 @@
 alias startpostgresql="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 # Stop PostgreSQL
 alias stoppostgresql="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+
 # Kill everything running on a specific port
 function killport() {
   kill $(lsof -iTCP -sTCP:LISTEN -n -P | grep $1 | awk '{print $2}')
 }
+
 # Rip a video with ffmpeg
 alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
 alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
+
+# Setup eza, modern alternative to ls
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons "$@"'
+  alias ll='eza -lh --icons "$@"'
+  alias la='eza -lha --icons "$@"'
+  alias l='eza -l --icons "$@"'
+  alias lsd='eza -lha --no-permissions --no-user --time-style=relative --icons "$@"'
+  alias lt='eza --tree --icons "$@"'
+  alias \ls='command ls "$@"'
+fi
