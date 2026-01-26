@@ -1,7 +1,7 @@
-model = "gpt-5.1-codex-mini"
+model = "gpt-5.2-codex"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 [sandbox_workspace_write]
 network_access = true
