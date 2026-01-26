@@ -100,8 +100,8 @@ FZF-EOF"
 
 # Setup z
 # https://github.com/rupa/z
-if [ -f /usr/local/etc/profile.d/z.sh ]; then
-  . /usr/local/etc/profile.d/z.sh
+if [ -f ~/z/z.sh ]; then
+  . ~/z/z.sh
 fi
 
 # Setup asdf
