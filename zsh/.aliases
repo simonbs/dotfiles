@@ -13,6 +13,7 @@ alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
 alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
 
 # Setup eza, modern alternative to ls
+# https://github.com/eza-community/eza
 if command -v eza >/dev/null 2>&1; then
   alias ls='eza --icons "$@"'
   alias ll='eza -lh --icons "$@"'
