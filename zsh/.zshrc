@@ -147,3 +147,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Configures LM Studio
+# https://lmstudio.ai
+export PATH="$PATH:/Users/simonbs/.lmstudio/bin"
+
