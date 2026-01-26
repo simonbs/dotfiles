@@ -136,6 +136,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # https://github.com/sharkdp/bat
 if command -v bat >/dev/null 2>&1; then
   export PAGER="bat"
+  export BAT_THEME="Dracula"
   alias cat="bat"
 fi
 
