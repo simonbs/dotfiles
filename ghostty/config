@@ -16,3 +16,6 @@ macos-icon-screen-color = #0f2213
 window-padding-x = 2,0
 window-inherit-working-directory = true
 keybind = shift+enter=text:\n
+keybind = ctrl+h=goto_split:previous
+keybind = ctrl+l=goto_split:next
+keybind = shift+command+s=equalize_splits
