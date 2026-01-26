@@ -15,11 +15,11 @@ alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
 # Setup eza, modern alternative to ls
 # https://github.com/eza-community/eza
 if command -v eza >/dev/null 2>&1; then
+  alias \ls='command ls "$@"'
   alias ls='eza --icons "$@"'
   alias ll='eza -lh --icons "$@"'
   alias la='eza -lha --icons "$@"'
   alias l='eza -l --icons "$@"'
   alias lsd='eza -lha --no-permissions --no-user --time-style=relative --icons "$@"'
   alias lt='eza --tree --icons "$@"'
-  alias \ls='command ls "$@"'
 fi
