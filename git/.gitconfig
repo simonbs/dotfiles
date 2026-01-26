@@ -54,13 +54,31 @@
 [core]
   excludesfile = ~/.gitignore_global
   editor = vim
+	pager = delta
 [difftool]
   prompt = false
 [commit]
   gpgsign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
+  program = /opt/homebrew/bin/gpg
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pager]
-	branch = false
+  branch = false
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  line-numbers = true
+  line-numbers-left-style = brightblack
+  line-numbers-right-style = brightblack
+  line-numbers-minus-style = brightred
+  line-numbers-plus-style = brightgreen
+  line-numbers-zero-style = brightblack
+  side-by-side = false
+  syntax-theme = Dracula
+  hunk-header-style = syntax
+  plus-style = "syntax #2D3E3F"
+  minus-style = "syntax #3D313B"
+[merge]
+  conflictStyle = zdiff3
