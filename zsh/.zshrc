@@ -132,6 +132,18 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Use bat as pager and cat replacement
+# https://github.com/sharkdp/bat
+if command -v bat >/dev/null 2>&1; then
+  export PAGER="bat"
+  alias cat="bat"
+fi
+
+# fzf with bat preview
+if command -v fzf >/dev/null 2>&1 && command -v bat >/dev/null 2>&1; then
+  alias fp="fzf --preview 'bat --style=numbers --color=always {}'"
+fi
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
