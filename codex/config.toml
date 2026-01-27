@@ -2,6 +2,7 @@ model = "gpt-5.2-codex"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 model_reasoning_effort = "high"
+suppress_unstable_features_warning = true
 
 [sandbox_workspace_write]
 network_access = true
