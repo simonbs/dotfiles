@@ -163,4 +163,4 @@ unset __conda_setup
 # Configures LM Studio
 # https://lmstudio.ai
 export PATH="$PATH:/Users/simonbs/.lmstudio/bin"
-
+export HOMEBREW_NO_ENV_HINTS=1
