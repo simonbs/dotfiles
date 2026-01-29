@@ -166,3 +166,7 @@ export PATH="$PATH:/Users/simonbs/.lmstudio/bin"
 
 # Disable Homebrew hints
 export HOMEBREW_NO_ENV_HINTS=1
+
+# Setup wut
+# https://github.com/simonbs/wut
+eval "$(wut init)"
