@@ -166,6 +166,8 @@ export HOMEBREW_NO_ENV_HINTS=1
 # https://github.com/simonbs/wut
 if command -v wut &>/dev/null; then
   eval "$(wut init)"
+  # wut + fzf
+  alias wt='cd "$(wut list | fzf --height=~20 | awk "{print \$3}" | sed "s|^~|$HOME|")"'
 fi
 
 # Custom aliases and helper functions
