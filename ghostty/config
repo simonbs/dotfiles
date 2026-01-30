@@ -20,4 +20,3 @@ keybind = ctrl+h=goto_split:previous
 keybind = ctrl+l=goto_split:next
 keybind = shift+command+s=equalize_splits
 keybind = option+backspace=text:\x17
-keybind = option+delete=esc:d
