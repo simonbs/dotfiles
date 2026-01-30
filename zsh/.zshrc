@@ -37,13 +37,8 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 # Set default editor
 export EDITOR="nova"
 
-# Aliases
-source ~/.aliases 2> /dev/null
-
-# Local aliases
-if [ -f ~/.aliases.local ]; then
-  source ~/.aliases.local 2> /dev/null
-fi
+# Set default editor
+export EDITOR="nova"
 
 # Setup fzf
 # https://github.com/junegunn/fzf
@@ -169,4 +164,44 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 # Setup wut
 # https://github.com/simonbs/wut
-eval "$(wut init)"
+if command -v wut &>/dev/null; then
+  eval "$(wut init)"
+fi
+
+# Custom aliases and helper functions
+
+# Enhanced listing via eza
+if command -v eza >/dev/null 2>&1; then
+  alias \ls='command ls "$@"'
+  alias ls='eza --icons "$@"'
+  alias ll='eza -lh --icons "$@"'
+  alias la='eza -lha --icons "$@"'
+  alias l='eza -l --icons "$@"'
+  alias lsd='eza -lha --no-permissions --no-user --time-style=relative --icons "$@"'
+  alias lt='eza --tree --icons "$@"'
+  alias lt1='lt --level=1'
+  alias lt2='lt --level=2'
+  alias lt3='lt --level=3'
+  alias lt4='lt --level=4'
+  alias lt5='lt --level=5'
+fi
+
+# PostgreSQL control helpers
+alias startpostgresql="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+alias stoppostgresql="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+
+# Kill everything running on a specific port
+killport() {
+  local pids
+  pids=$(lsof -iTCP -sTCP:LISTEN -n -P | grep "$1" | awk '{print $2}')
+  [ -n "$pids" ] && kill $pids
+}
+
+# Media ripper helpers
+alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
+alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
+
+# Local overrides for aliases and helpers
+if [ -f ~/.aliases.local ]; then
+  source ~/.aliases.local 2> /dev/null
+fi
