@@ -3,6 +3,7 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 model_reasoning_effort = "medium"
 suppress_unstable_features_warning = true
+web_search = "live"
 
 [sandbox_workspace_write]
 network_access = true
@@ -10,7 +11,6 @@ network_access = true
 [features]
 unified_exec = true
 shell_snapshot = true
-web_search_request = true
 collab = true
 collaboration_modes = true
 steer = true
