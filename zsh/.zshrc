@@ -31,6 +31,9 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 # /usr/local/bin takes precedence over /usr/bin
 export PATH="/usr/local/bin:$PATH"
 
+# Include ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
 # Add psql
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
