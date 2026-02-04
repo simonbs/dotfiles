@@ -165,6 +165,12 @@ export PATH="$PATH:/Users/simonbs/.lmstudio/bin"
 # Disable Homebrew hints
 export HOMEBREW_NO_ENV_HINTS=1
 
+# Setup ngrok
+# https://ngrok.com
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+
 # Setup wut
 # https://github.com/simonbs/wut
 if command -v wut &>/dev/null; then
@@ -172,8 +178,6 @@ if command -v wut &>/dev/null; then
   # wut + fzf
   alias wt='cd "$(wut list | fzf --height=~20 | awk "{print \$3}" | sed "s|^~|$HOME|")"'
 fi
-
-# Custom aliases and helper functions
 
 # Enhanced listing via eza
 if command -v eza >/dev/null 2>&1; then
