@@ -2,7 +2,6 @@ window-width = 120
 window-height = 45
 window-save-state = always
 theme = Dracula
-font-family = "JetBrains Mono Regular"
 font-family = "Fira Code Retina"
 font-size = 16
 cursor-style = block
