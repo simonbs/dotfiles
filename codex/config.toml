@@ -17,3 +17,16 @@ steer = true
 
 [notice]
 hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-mini" = "gpt-5.2-codex"
+"gpt-5.2" = "gpt-5.2-codex"
+
+[mcp_servers.xcode]
+command = "xcrun"
+args = ["mcpbridge"]
+enabled = false
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+enabled = false
