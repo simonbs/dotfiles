@@ -214,3 +214,10 @@ alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
 if [ -f ~/.aliases.local ]; then
   source ~/.aliases.local 2> /dev/null
 fi
+
+# bun completions
+[ -s "/Users/simonbs/.bun/_bun" ] && source "/Users/simonbs/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
