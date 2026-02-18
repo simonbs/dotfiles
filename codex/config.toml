@@ -12,7 +12,7 @@ network_access = true
 [features]
 unified_exec = true
 shell_snapshot = true
-collab = true
+multi_agent = true
 collaboration_modes = true
 steer = true
 
