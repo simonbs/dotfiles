@@ -223,3 +223,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Go
 export PATH="$HOME/go/bin:$PATH"
+
+# Scaleway CLI autocomplete initialization.
+eval "$(scw autocomplete script shell=zsh)"
