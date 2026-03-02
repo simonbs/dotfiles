@@ -2,9 +2,8 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# .zshrc.local should specify path to ZSH, e.g.
-# "export ZSH=/Users/username/.oh-my-zsh" on OS X
-if [[ -f "~/.zshrc.local" ]]; then
+# .zshrc.local should specify path to ZSH
+if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
