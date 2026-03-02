@@ -12,6 +12,7 @@ macos-icon = custom-style
 macos-icon-frame = aluminum
 macos-icon-ghost-color = #52fc85
 macos-icon-screen-color = #0f2213
+clipboard-paste-protection = false
 window-padding-x = 2,0
 window-inherit-working-directory = true
 keybind = shift+enter=text:\n
@@ -19,3 +20,7 @@ keybind = ctrl+h=goto_split:previous
 keybind = ctrl+l=goto_split:next
 keybind = shift+command+s=equalize_splits
 keybind = option+backspace=text:\x17
+keybind = cmd+ctrl+left=resize_split:left,40
+keybind = cmd+ctrl+right=resize_split:right,40
+keybind = cmd+ctrl+up=resize_split:up,40
+keybind = cmd+ctrl+down=resize_split:down,40
