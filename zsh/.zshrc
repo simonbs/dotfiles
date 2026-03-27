@@ -29,15 +29,10 @@ source ~/.oh-my-zsh/oh-my-zsh.sh
 
 # /usr/local/bin takes precedence over /usr/bin
 export PATH="/usr/local/bin:$PATH"
-
-# Include ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
 # Add psql
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-# Set default editor
-export EDITOR="nova"
 
 # Set default editor
 export EDITOR="nova"
@@ -142,25 +137,6 @@ if command -v fzf >/dev/null 2>&1 && command -v bat >/dev/null 2>&1; then
   alias fp="fzf --preview 'bat --style=numbers --color=always {}'"
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Configures LM Studio
-# https://lmstudio.ai
-export PATH="$PATH:/Users/simonbs/.lmstudio/bin"
-
 # Disable Homebrew hints
 export HOMEBREW_NO_ENV_HINTS=1
 
@@ -208,9 +184,7 @@ killport() {
 # Media ripper helpers
 alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
 alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
-if [ -f ~/Developer/dotfiles/scripts/tmp-codex ]; then
-  alias tmp-codex="~/Developer/dotfiles/scripts/tmp-codex"
-fi
+alias tmp-codex="~/Developer/dotfiles/scripts/tmp-codex"
 
 # Local overrides for aliases and helpers
 if [ -f ~/.aliases.local ]; then
