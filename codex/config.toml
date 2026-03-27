@@ -35,3 +35,11 @@ enabled = false
 [mcp_servers.figma]
 url = "https://mcp.figma.com/mcp"
 enabled = false
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["chrome-devtools-mcp@latest"]
+
+[mcp_servers.mobile-mcp]
+command = "npx"
+args = ["@mobilenext/mobile-mcp@latest"]
