@@ -5,6 +5,8 @@ model_reasoning_effort = "medium"
 suppress_unstable_features_warning = true
 web_search = "live"
 personality = "pragmatic"
+model_context_window = 1000000
+model_auto_compact_token_limit = 1000000
 
 # brrr agent integration start
 notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "--payload-json"]
