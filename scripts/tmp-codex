@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/tmp-codex.XXXXXX")"
+
+cleanup() {
+  rm -rf "$tmpdir"
+}
+trap cleanup EXIT
+
+codex -C "$tmpdir" "$@"

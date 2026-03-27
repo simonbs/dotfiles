@@ -208,6 +208,9 @@ killport() {
 # Media ripper helpers
 alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
 alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
+if [ -f ~/Developer/dotfiles/scripts/tmp-codex ]; then
+  alias tmp-codex="~/Developer/dotfiles/scripts/tmp-codex"
+fi
 
 # Local overrides for aliases and helpers
 if [ -f ~/.aliases.local ]; then
