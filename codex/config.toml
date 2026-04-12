@@ -34,14 +34,8 @@ command = "xcrun"
 args = ["mcpbridge"]
 enabled = false
 
-[mcp_servers.figma]
-url = "https://mcp.figma.com/mcp"
-enabled = false
+[plugins."github@openai-curated"]
+enabled = true
 
-[mcp_servers.chrome-devtools]
-command = "npx"
-args = ["chrome-devtools-mcp@latest"]
-
-[mcp_servers.mobile-mcp]
-command = "npx"
-args = ["@mobilenext/mobile-mcp@latest"]
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "five-hour-limit", "weekly-limit"]
