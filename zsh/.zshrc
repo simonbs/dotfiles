@@ -208,3 +208,17 @@ eval "$(scw autocomplete script shell=zsh)"
 copilot() {
   command copilot --allow-all-paths --allow-all-tools --allow-all-urls "$@"
 }
+
+# Codex wrapper to automatically allow current folder.
+function codex() {
+    __codex_automatically_trust_the_current_dir
+    command codex "$@"
+}
+function __codex_automatically_trust_the_current_dir() {
+    local key="[projects.\"$(pwd)\"]"
+    if rg --quiet -F "${key}" ~/.codex/config.toml; then
+        return
+    fi
+    echo "${key}" >> ~/.codex/config.toml
+    echo 'trust_level = "trusted"' >> ~/.codex/config.toml
+}
