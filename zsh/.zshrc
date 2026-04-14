@@ -203,3 +203,8 @@ export PATH="$HOME/go/bin:$PATH"
 
 # Scaleway CLI autocomplete initialization.
 eval "$(scw autocomplete script shell=zsh)"
+
+# Copilot wrapper to allow most things.
+copilot() {
+  command copilot --allow-all-paths --allow-all-tools --allow-all-urls "$@"
+}
