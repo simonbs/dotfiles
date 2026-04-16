@@ -222,3 +222,6 @@ function __codex_automatically_trust_the_current_dir() {
     echo "${key}" >> ~/.codex/config.toml
     echo 'trust_level = "trusted"' >> ~/.codex/config.toml
 }
+
+# Attach to agents tmux session
+alias agents-tmux="tmux new-session -A -s agents"
