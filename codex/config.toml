@@ -9,7 +9,7 @@ model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
 
 # brrr agent integration start
-notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "20"]
+notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "20", "--payload-json"]
 # brrr agent integration end
 
 [sandbox_workspace_write]
