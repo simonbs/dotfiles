@@ -6,7 +6,8 @@
     "allow": [
       "Read(*)",
       "Write(*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "WebFetch(*)"
     ]
   },
   "model": "opus",
