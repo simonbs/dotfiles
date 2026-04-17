@@ -11,6 +11,46 @@
     ]
   },
   "model": "opus",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event finished --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:stop:v1",
+            "async": true,
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event needs-approval --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:notification:permission_prompt:v1",
+            "async": true,
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event needs-approval --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:pretooluse:askuserquestion:v1",
+            "async": true,
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
