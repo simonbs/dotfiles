@@ -37,5 +37,12 @@ enabled = false
 [plugins."github@openai-curated"]
 enabled = true
 
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/Applications/Codex.app/Contents/Resources/plugins/openai-bundled"
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "five-hour-limit", "weekly-limit"]
