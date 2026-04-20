@@ -4,13 +4,23 @@
   },
   "permissions": {
     "allow": [
-      "Read(*)",
-      "Write(*)",
-      "Bash(echo:*)",
+      "Bash(*)",
+      "Read(**)",
+      "Write(**)",
+      "Edit(**)",
       "WebFetch(*)"
-    ]
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf /)",
+      "Bash(sudo rm -rf*)",
+      "Bash(mkfs*)",
+      "Bash(dd if=*of=/dev/*)",
+      "Bash(shutdown*)",
+      "Bash(reboot*)"
+    ],
+    "ask": []
   },
-  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -18,8 +28,8 @@
           {
             "type": "command",
             "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event finished --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:stop:v1",
-            "async": true,
-            "timeout": 5
+            "timeout": 5,
+            "async": true
           }
         ]
       }
@@ -31,8 +41,8 @@
           {
             "type": "command",
             "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event needs-approval --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:notification:permission_prompt:v1",
-            "async": true,
-            "timeout": 5
+            "timeout": 5,
+            "async": true
           }
         ]
       }
@@ -44,8 +54,8 @@
           {
             "type": "command",
             "command": "'/opt/homebrew/Cellar/node/25.9.0_2/bin/node' '/opt/homebrew/Cellar/brrr/0.1.5/libexec/dist/src/cli.js' agent dispatch --agent claude --event needs-approval --webhook '$BRRR_WEBHOOK_URL' --idle-seconds 20 # brrr:claude:pretooluse:askuserquestion:v1",
-            "async": true,
-            "timeout": 5
+            "timeout": 5,
+            "async": true
           }
         ]
       }
