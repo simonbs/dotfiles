@@ -225,3 +225,8 @@ function __codex_automatically_trust_the_current_dir() {
 
 # Attach to agents tmux session
 alias agents-tmux="tmux new-session -A -s agents"
+
+# Automatically attach to agents tmux session when SSHing into the machine.
+if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
+  agents-tmux
+fi
