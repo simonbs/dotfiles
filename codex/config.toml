@@ -21,6 +21,7 @@ shell_snapshot = true
 multi_agent = true
 collaboration_modes = true
 steer = true
+goals = true
 
 [notice]
 hide_rate_limit_model_nudge = true
