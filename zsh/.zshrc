@@ -231,3 +231,6 @@ alias agents-tmux="tmux new-session -A -s agents"
 # if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
 #   agents-tmux
 # fi
+
+# Recursively copy all .env.local files from the main worktree into the current worktree, skipping ignored directories and overriding existing files.
+alias sync-local-envs="~/Developer/dotfiles/scripts/sync-local-envs.sh"
