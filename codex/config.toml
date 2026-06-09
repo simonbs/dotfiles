@@ -30,20 +30,8 @@ hide_rate_limit_model_nudge = true
 "gpt-5.1-codex-mini" = "gpt-5.2-codex"
 "gpt-5.2" = "gpt-5.2-codex"
 
-[mcp_servers.xcode]
-command = "xcrun"
-args = ["mcpbridge"]
-enabled = false
-
 [plugins."github@openai-curated"]
 enabled = true
-
-[plugins."computer-use@openai-bundled"]
-enabled = true
-
-[marketplaces.openai-bundled]
-source_type = "local"
-source = "/Applications/Codex.app/Contents/Resources/plugins/openai-bundled"
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "context-used", "task-progress"]
