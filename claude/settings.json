@@ -64,5 +64,6 @@
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
-  "teammateMode": "tmux"
+  "teammateMode": "tmux",
+  "preferredNotifChannel": "ghostty"
 }
