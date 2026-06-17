@@ -65,35 +65,6 @@ args = ["chrome-devtools-mcp@latest"]
 [mcp_servers.wwdc26]
 url = "https://wwdc26.framnatools.io/mcp"
 
-[mcp_servers.node_repl]
-args = []
-command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
-startup_timeout_sec = 120
-
-[mcp_servers.node_repl.env]
-NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
-NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules"
-NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/simonbs/.codex"
-CODEX_HOME = "/Users/simonbs/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "099cb5ac09333da8389063d49d03a7e277fc87d858b0526a538f0871af93bf68"
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
-BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.611.61753"
-CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
-
-[marketplaces.openai-bundled]
-last_updated = "2026-06-17T08:47:05Z"
-source_type = "local"
-source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
-
-[marketplaces.openai-primary-runtime]
-last_updated = "2026-06-17T08:39:03Z"
-source_type = "local"
-source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
-
 [desktop]
 localeOverride = "en-US"
 mac-menu-bar-enabled = false
@@ -103,6 +74,33 @@ keepRemoteControlAwakeWhilePluggedIn = true
 git-show-sidebar-pr-icons = true
 git-always-force-push = false
 git-create-pull-request-as-draft = false
+reviewDelivery = "inline"
+appearanceTheme = "dark"
+appearanceDarkCodeThemeId = "dracula"
+usePointerCursors = false
+useFontSmoothing = true
+sansFontSize = 15
+codeFontSize = 15
+appearanceDiffMarkerStyle = "color"
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#ff79c6"
+contrast = 60
+ink = "#f8f8f2"
+opaqueWindows = false
+surface = "#282a36"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+code = "FiraCode-Retina"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#50fa7b"
+diffRemoved = "#ff5555"
+skill = "#ff79c6"
+[projects."/Users/simonbs/Desktop/Lumos"]
+trust_level = "trusted"
+[projects."/Users/simonbs/Developer/banzai-build"]
+trust_level = "trusted"
