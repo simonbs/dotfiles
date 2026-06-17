@@ -9,6 +9,7 @@ model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
 
 # brrr agent integration start
+# brrr original notify json: ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient","turn-ended","--previous-notify","[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
 notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "20", "--payload-json"]
 # brrr agent integration end
 
@@ -22,6 +23,7 @@ multi_agent = true
 collaboration_modes = true
 steer = true
 goals = true
+js_repl = false
 
 [notice]
 hide_rate_limit_model_nudge = true
@@ -29,8 +31,24 @@ hide_rate_limit_model_nudge = true
 [notice.model_migrations]
 "gpt-5.1-codex-mini" = "gpt-5.2-codex"
 "gpt-5.2" = "gpt-5.2-codex"
+"gpt-5.4" = "gpt-5.5"
 
 [plugins."github@openai-curated"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
 enabled = true
 
 [tui]
@@ -43,3 +61,48 @@ status_line_use_colors = true
 [mcp_servers.chrome-devtools]
 command = "npx"
 args = ["chrome-devtools-mcp@latest"]
+
+[mcp_servers.wwdc26]
+url = "https://wwdc26.framnatools.io/mcp"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/simonbs/.codex"
+CODEX_HOME = "/Users/simonbs/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "099cb5ac09333da8389063d49d03a7e277fc87d858b0526a538f0871af93bf68"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.611.61753"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+
+[marketplaces.openai-bundled]
+last_updated = "2026-06-17T08:47:05Z"
+source_type = "local"
+source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-06-17T08:39:03Z"
+source_type = "local"
+source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[desktop]
+localeOverride = "en-US"
+mac-menu-bar-enabled = false
+preventSleepWhileRunning = true
+show-context-window-usage = true
+keepRemoteControlAwakeWhilePluggedIn = true
+git-show-sidebar-pr-icons = true
+git-always-force-push = false
+git-create-pull-request-as-draft = false
+
+[desktop.open-in-target-preferences]
+global = "systemDefault"
