@@ -1,7 +1,7 @@
 model = "gpt-5.5"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 suppress_unstable_features_warning = true
 web_search = "live"
 personality = "pragmatic"
@@ -9,7 +9,6 @@ model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
 
 # brrr agent integration start
-# brrr original notify json: ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient","turn-ended","--previous-notify","[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
 notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "20", "--payload-json"]
 # brrr agent integration end
 
@@ -32,24 +31,6 @@ hide_rate_limit_model_nudge = true
 "gpt-5.1-codex-mini" = "gpt-5.2-codex"
 "gpt-5.2" = "gpt-5.2-codex"
 "gpt-5.4" = "gpt-5.5"
-
-[plugins."github@openai-curated"]
-enabled = true
-
-[plugins."computer-use@openai-bundled"]
-enabled = true
-
-[plugins."chrome@openai-bundled"]
-enabled = true
-
-[plugins."documents@openai-primary-runtime"]
-enabled = true
-
-[plugins."pdf@openai-primary-runtime"]
-enabled = true
-
-[plugins."browser@openai-bundled"]
-enabled = true
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "context-used", "task-progress"]
@@ -100,7 +81,3 @@ code = "FiraCode-Retina"
 diffAdded = "#50fa7b"
 diffRemoved = "#ff5555"
 skill = "#ff79c6"
-[projects."/Users/simonbs/Desktop/Lumos"]
-trust_level = "trusted"
-[projects."/Users/simonbs/Developer/banzai-build"]
-trust_level = "trusted"
