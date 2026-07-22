@@ -16,3 +16,5 @@ venv
 
 # Added by wut (https://github.com/simonbs/wut)
 .worktrees
+
+**/.claude/settings.local.json
