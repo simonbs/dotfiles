@@ -21,7 +21,6 @@
     ],
     "ask": []
   },
-  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -65,8 +64,10 @@
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
+  "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "preferredNotifChannel": "ghostty",
-  "teammateMode": "tmux"
+  "teammateMode": "tmux",
+  "model": "opus[1m]",
 }
