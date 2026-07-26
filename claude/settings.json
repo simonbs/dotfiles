@@ -69,5 +69,5 @@
   "theme": "dark",
   "preferredNotifChannel": "ghostty",
   "teammateMode": "tmux",
-  "model": "opus[1m]",
+  "model": "opus[1m]"
 }
