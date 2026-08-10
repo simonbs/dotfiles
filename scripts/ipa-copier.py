@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Copies IPAs downloaded with Apple Configurator to ~/Downloads.
 # Download an app with Apple Configurator using Add -> Apps in the toolbar.
 
