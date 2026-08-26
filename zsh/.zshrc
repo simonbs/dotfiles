@@ -209,25 +209,5 @@ copilot() {
   command copilot --allow-all-paths --allow-all-tools --allow-all-urls "$@"
 }
 
-# Codex wrapper to automatically allow current folder.
-function codex() {
-    __codex_automatically_trust_the_current_dir
-    command codex "$@"
-}
-function __codex_automatically_trust_the_current_dir() {
-    local key="[projects.\"$(pwd)\"]"
-    if rg --quiet -F "${key}" ~/.codex/config.toml; then
-        return
-    fi
-    echo "${key}" >> ~/.codex/config.toml
-    echo 'trust_level = "trusted"' >> ~/.codex/config.toml
-}
-
 # Attach to agents tmux session
 alias agents-tmux="tmux new-session -A -s agents"
-
-# Automatically attach to agents tmux session when SSHing into the machine.
-# Disable if using getmoshi.app, which has native tmux support.
-# if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
-#   agents-tmux
-# fi
