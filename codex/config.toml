@@ -2,28 +2,12 @@ model = "gpt-5.5"
 model_reasoning_effort = "high"
 model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
-service_tier = "default"
 
 personality = "pragmatic"
-web_search = "live"
 
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
-suppress_unstable_features_warning = true
-approvals_reviewer = "user"
 notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
-
-[sandbox_workspace_write]
-network_access = true
-
-[features]
-unified_exec = true
-shell_snapshot = true
-multi_agent = true
-collaboration_modes = true
-steer = true
-goals = true
-js_repl = false
 
 [notice]
 hide_rate_limit_model_nudge = true
@@ -59,8 +43,6 @@ appearanceTheme = "dark"
 appearanceDarkCodeThemeId = "dracula"
 sansFontSize = 15
 codeFontSize = 15
-useFontSmoothing = true
-usePointerCursors = false
 
 localeOverride = "en-US"
 mac-menu-bar-enabled = false
@@ -69,10 +51,7 @@ keepRemoteControlAwakeWhilePluggedIn = true
 show-context-window-usage = true
 
 git-show-sidebar-pr-icons = true
-git-always-force-push = false
 git-create-pull-request-as-draft = false
-reviewDelivery = "inline"
-appearanceDiffMarkerStyle = "color"
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
