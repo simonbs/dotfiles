@@ -98,12 +98,19 @@ enabled = true
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
 [marketplaces.openai-bundled]
-last_updated = "2026-06-25T06:08:47Z"
 source_type = "local"
 source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-06-25T06:39:01Z"
 source_type = "local"
 source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
