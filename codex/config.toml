@@ -57,6 +57,7 @@ show-context-window-usage = true
 
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
+followUpQueueMode = "queue"
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
