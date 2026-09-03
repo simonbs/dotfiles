@@ -44,7 +44,7 @@ command = "xcrun"
 args = ["mcpbridge"]
 
 [desktop]
-appearanceTheme = "dark"
+appearanceTheme = "system"
 appearanceDarkCodeThemeId = "dracula"
 sansFontSize = 15
 codeFontSize = 15
