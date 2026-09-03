@@ -34,6 +34,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add psql
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
+# Add Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+
 # Set default editor
 export EDITOR="nova"
 
