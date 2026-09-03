@@ -13,6 +13,8 @@ macos-icon-frame = aluminum
 macos-icon-ghost-color = #52fc85
 macos-icon-screen-color = #0f2213
 clipboard-paste-protection = false
+copy-on-select = clipboard
+mouse-shift-capture = never
 window-padding-x = 2,0
 window-inherit-working-directory = true
 keybind = shift+enter=text:\n
