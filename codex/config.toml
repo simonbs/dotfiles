@@ -36,9 +36,6 @@ pet = "disabled"
 command = "npx"
 args = ["chrome-devtools-mcp@latest"]
 
-[mcp_servers.wwdc26]
-url = "https://wwdc26.framnatools.io/mcp"
-
 [mcp_servers.xcode]
 command = "xcrun"
 args = ["mcpbridge"]
