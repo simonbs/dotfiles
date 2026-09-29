@@ -215,3 +215,6 @@ copilot() {
 
 # Attach to agents tmux session
 alias agents-tmux="tmux new-session -A -s agents"
+
+# Unity CLI
+. "/Users/simonbs/.unity/env"
