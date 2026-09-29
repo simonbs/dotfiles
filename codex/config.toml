@@ -1,5 +1,5 @@
-model = "gpt-5.5"
-model_reasoning_effort = "high"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "low"
 model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
 
@@ -9,28 +9,30 @@ approval_policy = "never"
 sandbox_mode = "danger-full-access"
 service_tier = "default"
 
-# brrr agent integration start
-# brrr original notify json: ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient","turn-ended","--previous-notify","[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
-notify = ["brrr", "agent", "dispatch", "--agent", "codex", "--event", "finished", "--webhook", "$BRRR_WEBHOOK_URL", "--idle-seconds", "20", "--payload-json"]
-# brrr agent integration end
+notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
+
+[features]
+hooks = true
 
 [notice]
 hide_rate_limit_model_nudge = true
 hide_full_access_warning = true
 
-[notice.model_migrations]
-"gpt-5.1-codex-mini" = "gpt-5.2-codex"
-"gpt-5.2" = "gpt-5.2-codex"
-"gpt-5.4" = "gpt-5.5"
-
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "pull-request-number", "context-used", "task-progress"]
 status_line_use_colors = true
 pet = "disabled"
+screen_reader_detection_done = true
+theme = "dracula"
+
+[tui.keymap.chat]
+skip_question = "ctrl-alt-s"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 "gpt-5.6-sol" = 4
+"gpt-6-astra" = 4
+"gpt-6.1-sol" = 3
 
 [mcp_servers.chrome-devtools]
 command = "npx"
@@ -39,6 +41,12 @@ args = ["chrome-devtools-mcp@latest"]
 [mcp_servers.xcode]
 command = "xcrun"
 args = ["mcpbridge"]
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = false
 
 [desktop]
 appearanceTheme = "system"
@@ -55,6 +63,8 @@ show-context-window-usage = true
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
 followUpQueueMode = "queue"
+conversationDetailMode = "STEPS_COMMANDS"
+toys-confetti-enabled = true
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
@@ -98,10 +108,13 @@ enabled = true
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
 
-[plugins."sites@openai-bundled"]
+[plugins."visualize@openai-bundled"]
 enabled = true
 
-[plugins."visualize@openai-bundled"]
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
 enabled = true
 
 [marketplaces.openai-bundled]
