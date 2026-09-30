@@ -141,6 +141,15 @@ enabled = true
 [plugins."code-review@openai-bundled"]
 enabled = true
 
+[plugins."sbs-dev@sbs"]
+enabled = true
+
+[plugins."sbs-utils@sbs"]
+enabled = true
+
+[plugins."sbs-news@sbs"]
+enabled = true
+
 [marketplaces.openai-bundled]
 source_type = "local"
 source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
@@ -148,3 +157,8 @@ source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
 [marketplaces.openai-primary-runtime]
 source_type = "local"
 source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[marketplaces.sbs]
+source_type = "git"
+source = "https://github.com/simonbs/agent-plugin-marketplace.git"
+ref = "main"
