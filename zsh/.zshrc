@@ -218,3 +218,29 @@ alias agents-tmux="tmux new-session -A -s agents"
 
 # Unity CLI
 . "/Users/simonbs/.unity/env"
+
+# Switching Codex accounts
+codex-with-args() {
+  local shared_dir="$HOME/.codex"
+  local shadow_dir="$1"
+  local entry name
+  shift
+
+  mkdir -p "$shadow_dir" || return
+  chmod 700 "$shadow_dir" || return
+
+  # Include hidden entries; skip auth.json.
+  for entry in "$shared_dir"/*(DN); do
+    name="${entry:t}"
+    [[ "$name" == "auth.json" ]] && continue
+
+    # Add missing links without overwriting existing entries.
+    if [[ ! -e "$shadow_dir/$name" && ! -L "$shadow_dir/$name" ]]; then
+      ln -s "$entry" "$shadow_dir/$name" || return
+    fi
+  done
+
+  CODEX_HOME="$shadow_dir" command codex --no-daemon "$@"
+}
+alias codexb="codex"
+alias codexp='codex-with-args "$HOME/.codex-framna-personal"'
