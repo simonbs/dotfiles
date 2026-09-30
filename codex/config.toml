@@ -63,8 +63,10 @@ show-context-window-usage = true
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
 followUpQueueMode = "queue"
-conversationDetailMode = "STEPS_COMMANDS"
+conversationDetailMode = "STEPS_PROSE"
 toys-confetti-enabled = true
+confirm-before-close = "never"
+ambient-suggestions-enabled = true
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
