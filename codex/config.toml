@@ -2,17 +2,12 @@ model = "gpt-6.1-sol"
 model_reasoning_effort = "medium"
 model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
-
-personality = "pragmatic"
+service_tier = "default"
 
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
-service_tier = "default"
 
 notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
-
-[features]
-hooks = true
 
 [notice]
 hide_rate_limit_model_nudge = true
