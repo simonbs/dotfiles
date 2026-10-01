@@ -7,7 +7,7 @@ service_tier = "default"
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
-notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"brrr\",\"agent\",\"dispatch\",\"--agent\",\"codex\",\"--event\",\"finished\",\"--webhook\",\"$BRRR_WEBHOOK_URL\",\"--idle-seconds\",\"20\",\"--payload-json\"]"]
+notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 
 [notice]
 hide_rate_limit_model_nudge = true
@@ -80,10 +80,11 @@ show-context-window-usage = true
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
 followUpQueueMode = "queue"
-conversationDetailMode = "STEPS_PROSE"
+conversationDetailMode = "STEPS_COMMANDS"
 toys-confetti-enabled = true
 confirm-before-close = "never"
 ambient-suggestions-enabled = true
+notifications-sound = "none"
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
