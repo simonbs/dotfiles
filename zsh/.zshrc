@@ -229,10 +229,11 @@ codex-with-args() {
   mkdir -p "$shadow_dir" || return
   chmod 700 "$shadow_dir" || return
 
-  # Include hidden entries; skip auth.json.
+  # Share entries except account-specific credentials and daemon runtime files.
   for entry in "$shared_dir"/*(DN); do
     name="${entry:t}"
-    [[ "$name" == "auth.json" ]] && continue
+    # Credentials and daemon sockets/locks belong to each account.
+    [[ "$name" == "auth.json" || "$name" == "app-server-control" || "$name" == "app-server-daemon" ]] && continue
 
     # Add missing links without overwriting existing entries.
     if [[ ! -e "$shadow_dir/$name" && ! -L "$shadow_dir/$name" ]]; then
@@ -240,7 +241,7 @@ codex-with-args() {
     fi
   done
 
-  CODEX_HOME="$shadow_dir" command codex --no-daemon "$@"
+  CODEX_HOME="$shadow_dir" command codex "$@"
 }
 alias codexb="codex"
 alias codexp='codex-with-args "$HOME/.codex-framna-personal"'

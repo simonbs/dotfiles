@@ -1,3 +1,6 @@
+# Share conversation history through a canonical SQLite directory.
+sqlite_home = "/Users/simonbs/.codex"
+
 model = "gpt-6.1-sol"
 model_reasoning_effort = "medium"
 model_context_window = 1000000
