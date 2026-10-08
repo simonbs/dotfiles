@@ -88,6 +88,8 @@ toys-confetti-enabled = true
 confirm-before-close = "never"
 ambient-suggestions-enabled = true
 notifications-sound = "none"
+appshotAlwaysSendToMini = true
+appshotSoundEnabled = true
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
