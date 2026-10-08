@@ -220,11 +220,17 @@ alias agents-tmux="tmux new-session -A -s agents"
 . "/Users/simonbs/.unity/env"
 
 # Switching Codex accounts
+unalias codex codexb codexp codexfb codexfp 2>/dev/null
 codex-with-args() {
   local shared_dir="$HOME/.codex"
   local shadow_dir="$1"
-  local entry name
+  local entry name backup_dir
   shift
+
+  if [[ "${shadow_dir:A}" == "${shared_dir:A}" ]]; then
+    print -u2 "Codex account directory must differ from $shared_dir"
+    return 1
+  fi
 
   mkdir -p "$shadow_dir" || return
   chmod 700 "$shadow_dir" || return
@@ -235,13 +241,21 @@ codex-with-args() {
     # Credentials and daemon sockets/locks belong to each account.
     [[ "$name" == "auth.json" || "$name" == "app-server-control" || "$name" == "app-server-daemon" ]] && continue
 
-    # Add missing links without overwriting existing entries.
-    if [[ ! -e "$shadow_dir/$name" && ! -L "$shadow_dir/$name" ]]; then
-      ln -s "$entry" "$shadow_dir/$name" || return
+    # Keep ~/.codex authoritative, preserving separate copies before linking.
+    if [[ -L "$shadow_dir/$name" && "$(readlink "$shadow_dir/$name")" == "$entry" ]]; then
+      continue
     fi
+    if [[ -e "$shadow_dir/$name" || -L "$shadow_dir/$name" ]]; then
+      if [[ -z "$backup_dir" ]]; then
+        backup_dir="$(mktemp -d "$shadow_dir/shared-backup.XXXXXXXX")" || return
+      fi
+      mv "$shadow_dir/$name" "$backup_dir/$name" || return
+    fi
+    ln -s "$entry" "$shadow_dir/$name" || return
   done
 
-  CODEX_HOME="$shadow_dir" command codex "$@"
+  CODEX_HOME="$shadow_dir" command codex -c 'cli_auth_credentials_store="file"' "$@"
 }
-alias codexb="codex"
-alias codexp='codex-with-args "$HOME/.codex-framna-personal"'
+alias codexfb='codex-with-args "$HOME/.codex-framna-business"'
+alias codexfp='codex-with-args "$HOME/.codex-framna-personal"'
+alias codex='codexfb'
