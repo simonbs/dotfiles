@@ -149,6 +149,9 @@ enabled = true
 [plugins."sbs-news@sbs"]
 enabled = true
 
+[plugins."chrome@openai-bundled"]
+enabled = true
+
 [marketplaces.openai-bundled]
 source_type = "local"
 source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
