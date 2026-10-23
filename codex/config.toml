@@ -1,11 +1,11 @@
+allow_symlinked_codex_home = true
 # Share conversation history through a canonical SQLite directory.
 sqlite_home = "/Users/simonbs/.codex"
 
-model = "gpt-6.1-sol"
-model_reasoning_effort = "medium"
+model = "gpt-6-astra"
+model_reasoning_effort = "high"
 model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
-service_tier = "default"
 
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
@@ -40,6 +40,9 @@ args = ["chrome-devtools-mcp@latest"]
 command = "xcrun"
 args = ["mcpbridge"]
 
+[mcp_servers.xcode.tools.XcodeOpenWorkspace]
+approval_mode = "approve"
+
 [mcp_servers.computer-use]
 command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
 args = ["mcp"]
@@ -49,6 +52,7 @@ enabled = false
 [mcp_servers.node_repl]
 args = []
 command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
 startup_timeout_sec = 120
 
 [mcp_servers.node_repl.env]
@@ -63,10 +67,13 @@ NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.930.61225"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/simonbs/.codex/plugins/cache/openai-bundled/browser/26.930.61225/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.1016.61520"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/simonbs/.codex/plugins/cache/openai-bundled/browser/26.1016.61520/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/simonbs/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
+
+[mcp_servers.worklog]
+url = "https://worklog.fyi/mcp"
 
 [desktop]
 appearanceTheme = "system"
@@ -92,7 +99,10 @@ appshotAlwaysSendToMini = true
 appshotSoundEnabled = true
 
 [desktop.open-in-target-preferences]
-global = "systemDefault"
+global = "fileManager"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/simonbs/.codex/worktrees/typescript-feasibility/scriptable2" = "fileManager"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#ff79c6"
@@ -139,9 +149,6 @@ enabled = true
 [plugins."unified-computer-use@openai-bundled"]
 enabled = true
 
-[plugins."code-review@openai-bundled"]
-enabled = true
-
 [plugins."sbs-dev@sbs"]
 enabled = true
 
@@ -152,6 +159,9 @@ enabled = true
 enabled = true
 
 [plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."code-review@openai-bundled"]
 enabled = true
 
 [marketplaces.openai-bundled]
@@ -166,3 +176,65 @@ source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/ope
 source_type = "git"
 source = "https://github.com/simonbs/agent-plugin-marketplace.git"
 ref = "main"
+
+[projects."/Users/simonbs/Desktop"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/brrr-cli"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/wavy-road"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/worklog.fyi"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/banzai-codes-workspace"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/Festivitas"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/.codex"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/banzai-build"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/trymy.build"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/dotfiles"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/podbridge"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/scriptable2"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/app-intel"]
+trust_level = "trusted"
+
+[projects."/Users/simonbs/Developer/2famigo"]
+trust_level = "trusted"
+
+[hooks.state]
+
+[hooks.state."/Users/simonbs/.codex-framna-personal/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:8b4e3b8f200cd7e49f73ae2aec6fb0e485e73d60e05973a0b4ba49cb3a7160e1"
+
+[hooks.state."/Users/simonbs/.codex-framna-personal/hooks.json:stop:0:0"]
+trusted_hash = "sha256:756a3b5a84e5413fbd38b93cc4d3840f3ca9ce84c72290754cc862621c51d5f8"
+
+[hooks.state."/Users/simonbs/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:8b4e3b8f200cd7e49f73ae2aec6fb0e485e73d60e05973a0b4ba49cb3a7160e1"
+
+[hooks.state."/Users/simonbs/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:756a3b5a84e5413fbd38b93cc4d3840f3ca9ce84c72290754cc862621c51d5f8"
+
+[apps.asdk_app_6ac777de147081919b8fab18fea99c30]
+enabled = true
