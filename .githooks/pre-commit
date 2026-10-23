@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""Keep machine-specific Codex trust and hook state out of the Git index."""
+
+import json
+import re
+import subprocess
+import sys
+
+
+CONFIG = "codex/config.toml"
+
+
+def git(*args):
+    return subprocess.check_output(["git", *args], text=True)
+
+
+def key_path(tokens):
+    """Read TOML bare or quoted keys separated by dots."""
+    if not tokens or len(tokens) % 2 == 0:
+        return None
+    result = []
+    for index, token in enumerate(tokens):
+        if index % 2:
+            if token != ".":
+                return None
+        elif re.fullmatch(r"[A-Za-z0-9_-]+", token):
+            result.append(token)
+        elif token.startswith('"') and not token.startswith('"""'):
+            try:
+                result.append(json.loads(token))
+            except ValueError:
+                return None
+        elif token.startswith("'") and not token.startswith("'''"):
+            result.append(token[1:-1])
+        else:
+            return None
+    return result
+
+
+def private_path(path):
+    return path and (path[0] == "projects" or path[:2] == ["hooks", "state"])
+
+
+def find_private_settings(source):
+    # Strings are single tokens, including multiline strings, so examples and
+    # comments containing table names cannot be mistaken for real settings.
+    token_pattern = re.compile(
+        r'"""(?:\\[\s\S]|(?!""")[\s\S])*"""'
+        r"|'''[\s\S]*?'''"
+        r'|"(?:\\[^\n]|[^"\\\n])*"'
+        r"|'[^'\n]*'"
+        r"|#[^\n]*|\n|[A-Za-z0-9_-]+|[^\s]"
+    )
+    section = []
+    statement = []
+    line_number = 1
+    start_line = 1
+    for token in token_pattern.findall(source) + ["\n"]:
+        if token.startswith("#"):
+            continue
+        if token == "\n":
+            path = None
+            if statement and statement[0] == "[":
+                array = statement[:2] == ["[", "["]
+                edge = 2 if array else 1
+                if statement[-edge:] == ["]"] * edge:
+                    path = key_path(statement[edge:-edge])
+                    if path is not None:
+                        section = path
+            elif "=" in statement:
+                key = key_path(statement[:statement.index("=")])
+                if key is not None:
+                    path = section + key
+            if private_path(path):
+                return start_line
+            statement = []
+            line_number += 1
+            start_line = line_number
+        else:
+            statement.append(token)
+            line_number += token.count("\n")
+    return None
+
+
+try:
+    changed = git("diff", "--cached", "--name-only", "--diff-filter=ACMRT", "--", CONFIG)
+    if CONFIG not in changed.splitlines():
+        sys.exit(0)
+    line = find_private_settings(git("show", ":" + CONFIG))
+    if line is not None:
+        print(
+            f"Commit blocked: staged {CONFIG}:{line} contains saved project approvals "
+            "or Codex hook state.\n"
+            "Remove [projects...] and [hooks.state...] sections (or equivalent "
+            "inline settings) from the file, then run git add codex/config.toml again.\n"
+            "These machine-specific settings must stay out of the dotfiles repository.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+except subprocess.CalledProcessError:
+    print("Commit blocked: could not inspect the staged Codex configuration.", file=sys.stderr)
+    sys.exit(1)

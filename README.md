@@ -12,8 +12,11 @@ brew install --cask font-fira-code-nerd-font
 brew tap simonbs/wut https://github.com/simonbs/wut.git
 brew install simonbs/wut/wut
 stow -t "$HOME" zsh starship tmux
+git config --local core.hooksPath .githooks
 exec zsh
 ```
+
+The Git hook needs Python 3. It blocks commits that contain saved Codex project approvals or hook trust state and checks the files staged for commit.
 
 Stow creates links from your home folder to files in this repository. Changes here take effect through those links. Back up existing files if Stow reports a conflict. To remove links, use `stow -D -t "$HOME" <folder>`.
 
@@ -111,7 +114,3 @@ Run `codexfb` or `codexfp` to start. Plain `codex` uses the business account. `c
 | `scripts` | Video download helpers, an IPA copier, and a temporary-folder Codex launcher |
 
 `rip` needs ffmpeg. `rip-yt` needs yt-dlp and ffmpeg and reads cookies from Chrome. `scripts/ipa-copier.py` copies Apple Configurator downloads to `~/Downloads`. `tmp-codex` runs Codex in a temporary folder and removes that folder when it exits.
-
-## Moving from the old shell setup
-
-Oh My Zsh, Powerlevel10k, the old `z` script, and asdf are no longer loaded. Remove their startup commands from local files and remove the old `~/.p10k.zsh` link if it points to this repository.
