@@ -1,0 +1,173 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Rounded Dracula segments with Nerd Font icons.
+# Conditional groups hide entire segments when their modules are empty.
+format = """
+$username$hostname$directory\
+([](fg:pink)$git_branch$git_commit$git_state$git_status[](fg:pink) )\
+$fill\
+([](fg:surface)$nodejs$bun$python$ruby$rust$golang$swift$terraform$kubernetes$aws$azure$gcloud$direnv$conda$nix_shell[](fg:surface) )\
+$jobs$cmd_duration$status\
+$line_break$character"""
+add_newline = true
+palette = 'dracula'
+
+[palettes.dracula]
+foreground = '#f8f8f2'
+background = '#282a36'
+surface = '#44475a'
+comment = '#6272a4'
+cyan = '#8be9fd'
+green = '#50fa7b'
+orange = '#ffb86c'
+pink = '#ff79c6'
+purple = '#bd93f9'
+red = '#ff5555'
+yellow = '#f1fa8c'
+
+[fill]
+symbol = ' '
+
+[username]
+style_user = 'bold purple'
+style_root = 'bold red'
+format = '[$user]($style) '
+
+[hostname]
+ssh_only = true
+style = 'bold purple'
+format = '[@$hostname]($style) '
+
+[directory]
+format = '[](fg:purple)[  $path$read_only ]($style)[](fg:purple) '
+style = 'bold fg:background bg:purple'
+truncation_length = 3
+truncate_to_repo = true
+read_only = ' '
+read_only_style = 'fg:background bg:purple'
+truncation_symbol = '…/'
+
+[git_branch]
+symbol = ''
+style = 'bold fg:background bg:pink'
+format = '[ $symbol $branch ]($style)'
+
+[git_commit]
+format = '[  $hash ]($style)'
+style = 'bold fg:background bg:pink'
+
+[git_state]
+format = '[ $state( $progress_current/$progress_total) ]($style)'
+style = 'bold fg:background bg:pink'
+
+[git_status]
+format = '[$all_status$ahead_behind]($style)'
+style = 'fg:background bg:pink'
+conflicted = '=$count '
+ahead = '↑$count '
+behind = '↓$count '
+diverged = '↑$ahead_count ↓$behind_count '
+untracked = '?$count '
+stashed = '*$count '
+modified = '~$count '
+staged = '+$count '
+renamed = '»$count '
+deleted = '-$count '
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+vimcmd_symbol = '[❮](bold green)'
+
+[cmd_duration]
+min_time = 3000
+format = '[󱎫 $duration]($style) '
+style = 'yellow'
+
+[status]
+disabled = false
+symbol = '✘ '
+format = '[$symbol$status]($style) '
+style = 'bold red'
+
+[jobs]
+symbol = ' '
+style = 'cyan'
+
+[nodejs]
+symbol = ' '
+style = 'fg:green bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[bun]
+symbol = ' '
+style = 'fg:foreground bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[python]
+symbol = ' '
+style = 'fg:yellow bg:surface'
+format = '[ $symbol$version( $virtualenv) ]($style)'
+
+[ruby]
+symbol = ' '
+style = 'fg:red bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[rust]
+symbol = ' '
+style = 'fg:orange bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[golang]
+symbol = ' '
+style = 'fg:cyan bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[swift]
+symbol = ' '
+style = 'fg:orange bg:surface'
+format = '[ $symbol$version ]($style)'
+
+[terraform]
+symbol = '󱁢 '
+style = 'fg:purple bg:surface'
+format = '[ $symbol$workspace ]($style)'
+
+[kubernetes]
+disabled = false
+symbol = '󱃾 '
+style = 'fg:cyan bg:surface'
+format = '[ $symbol$context( \($namespace\)) ]($style)'
+
+[aws]
+symbol = ' '
+style = 'fg:orange bg:surface'
+format = '[ $symbol($profile)( \($region\)) ]($style)'
+
+[azure]
+disabled = false
+symbol = '󰠅 '
+style = 'fg:cyan bg:surface'
+format = '[ $symbol$subscription ]($style)'
+
+[gcloud]
+symbol = '󱇶 '
+style = 'fg:cyan bg:surface'
+format = '[ $symbol$project ]($style)'
+
+[direnv]
+disabled = false
+symbol = ' '
+style = 'fg:orange bg:surface'
+format = '[ $symbol$loaded/$allowed ]($style)'
+
+[conda]
+symbol = ' '
+style = 'fg:green bg:surface'
+format = '[ $symbol$environment ]($style)'
+
+[nix_shell]
+symbol = ' '
+style = 'fg:cyan bg:surface'
+format = '[ $symbol$name ]($style)'

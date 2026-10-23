@@ -2,58 +2,124 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# .zshrc.local should specify path to ZSH
+# Machine-specific environment and PATH settings
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
 
-# Set powerlevel10k theme.
-# https://github.com/romkatv/powerlevel10k
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-source ~/.oh-my-zsh/oh-my-zsh.sh
-
-# /usr/local/bin takes precedence over /usr/bin
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
-# Add psql
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-# Add Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+# Keep PATH and completion directories unique, including when re-sourcing.
+export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
+typeset -U path fpath
+path=(
+  "$HOME/go/bin"
+  "$BUN_INSTALL/bin"
+  /opt/homebrew/opt/rustup/bin
+  "$HOME/.cargo/bin"
+  /opt/homebrew/opt/postgresql@16/bin
+  "$HOME/.local/bin"
+  /opt/homebrew/bin /opt/homebrew/sbin
+  /usr/local/bin
+  "${path[@]}"
+  /usr/bin /bin /usr/sbin /sbin
+)
+export PATH
 
 # Set default editor
 export EDITOR="nova"
 
-# Setup fzf
-# https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# History shared between interactive shells
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt extended_history share_history hist_ignore_dups hist_ignore_space
+setopt hist_reduce_blanks hist_save_no_dups hist_verify
+
+# Directory navigation and shell behavior previously supplied by Oh My Zsh
+setopt auto_cd auto_pushd pushd_ignore_dups pushd_minus interactive_comments
+unsetopt flow_control
+
+# Initialize completion before tools register their own completions
+[[ ! -d /opt/homebrew/share/zsh/site-functions ]] || fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+[[ ! -d /usr/local/share/zsh/site-functions ]] || fpath=(/usr/local/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' rehash true
+
+# Emacs editing with history search using the text already entered
+bindkey -e
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey '^[OA' up-line-or-beginning-search
+bindkey '^[OB' down-line-or-beginning-search
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
+# Common Git shortcuts, without a plugin framework
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gap='git add --patch'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gc='git commit --verbose'
+alias gc!='git commit --verbose --amend'
+alias gcam='git commit --all --message'
+alias gcmsg='git commit --message'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gf='git fetch'
+alias gfa='git fetch --all --prune'
+alias gl='git pull'
+alias glog='git log --oneline --decorate --graph'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias grb='git rebase'
+alias grbi='git rebase --interactive'
+alias grs='git restore'
+alias grss='git restore --staged'
+alias gst='git status'
+alias gss='git status --short'
+alias gsta='git stash push'
+alias gstp='git stash pop'
+alias gsw='git switch'
+alias gswc='git switch --create'
 
 # Set theme of fzf
 # https://github.com/dracula/fzf
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+export FZF_DEFAULT_OPTS='--height=60% --layout=reverse --border=rounded --walker-skip=.git,node_modules,.build,target --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# Use fzf's built-in file walker; no ag, fd, or generated ~/.fzf.zsh needed.
+# Discard the old dotfiles defaults if inherited when restarting an existing shell.
+[[ ${FZF_DEFAULT_COMMAND-} != 'ag --hidden --ignore .git -g ""' ]] || unset FZF_DEFAULT_COMMAND
+[[ ${FZF_CTRL_T_COMMAND-} != 'ag --hidden --ignore .git -g ""' ]] || unset FZF_CTRL_T_COMMAND
+export FZF_CTRL_T_OPTS='--walker=file,hidden'
+export FZF_ALT_C_OPTS='--walker=dir,hidden'
+if command -v bat >/dev/null 2>&1; then
+  export FZF_CTRL_T_OPTS="$FZF_CTRL_T_OPTS --preview 'bat --style=numbers --color=always -- {}' --preview-window=right:50%:hidden --bind 'ctrl-/:toggle-preview'"
+fi
+
+# Ctrl-R: history, Ctrl-T: files, Alt-C: directories, **<Tab>: completion.
+# Initialize after compinit and the default key bindings above.
+# https://github.com/junegunn/fzf#setting-up-shell-integration
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
 
 # cd to selected directory with fzf
 # https://github.com/junegunn/fzf/wiki/examples
 fd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
+  dir=$(find "${1:-.}" -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
@@ -64,9 +130,9 @@ fd() {
 # https://github.com/junegunn/fzf/wiki/examples
 fo() {
   local out file key
-  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
+  out=$(fzf --query="$1" --exit-0 --expect=ctrl-o,ctrl-e) || return
+  key=${out%%$'\n'*}
+  file=${out#*$'\n'}
   if [ -n "$file" ]; then
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
@@ -75,10 +141,9 @@ fo() {
 # Checkout git branch with fzf
 # https://github.com/junegunn/fzf/wiki/examples
 fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  local branch
+  branch=$(git for-each-ref --format='%(refname:short)' refs/heads | fzf +m) || return
+  [[ -n "$branch" ]] && git switch -- "$branch"
 }
 
 # Show git commits with fzf
@@ -94,43 +159,19 @@ fshow() {
 FZF-EOF"
 }
 
-# Setup z
-# https://github.com/rupa/z
-if [ -f ~/z/z.sh ]; then
-  . ~/z/z.sh
+# Smarter directory navigation: z <query>, zi for an fzf picker
+# https://github.com/ajeetdsouza/zoxide
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
 fi
 
-# Setup asdf
-# https://asdf-vm.com
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-# z with fzf
-# Like normal z when used with arguments but displays an fzf prompt when used without
-# https://github.com/junegunn/fzf/wiki/examples
-unalias z 2> /dev/null
-z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf --height 40% --reverse --inline-info +s --tac --query "$*" | sed 's/^[0-9,.]* *//')"
-}
-
 # Configures GPG tty
-# Use Zsh's TTY because Powerlevel10k instant prompt redirects stdin.
-# https://github.com/romkatv/powerlevel10k#how-do-i-export-gpg_tty-when-using-instant-prompt
 export GPG_TTY=$TTY
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Use bat as pager and cat replacement
+# Use bat for file viewing and less as the general-purpose pager
 # https://github.com/sharkdp/bat
 if command -v bat >/dev/null 2>&1; then
-  export PAGER="bat"
+  export PAGER="less"
   export BAT_THEME="Dracula"
   alias cat="bat"
 fi
@@ -152,20 +193,28 @@ fi
 # Setup wut
 # https://github.com/simonbs/wut
 if command -v wut &>/dev/null; then
+  # wut registers Bash-style completions before enabling Zsh compatibility.
+  autoload -Uz bashcompinit
+  bashcompinit
   eval "$(wut init)"
-  # wut + fzf
-  alias wt='cd "$(wut list | fzf --height=~20 | awk "{print \$3}" | sed "s|^~|$HOME|")"'
+  # Select worktree paths directly, preserving spaces and cancellation.
+  wt() {
+    local dir
+    dir=$(git worktree list --porcelain |
+      awk '/^worktree / { sub(/^worktree /, ""); print }' |
+      fzf --height=~20) || return
+    [[ -n "$dir" ]] && cd -- "$dir"
+  }
 fi
 
 # Enhanced listing via eza
 if command -v eza >/dev/null 2>&1; then
-  alias \ls='command ls "$@"'
-  alias ls='eza --icons "$@"'
-  alias ll='eza -lh --icons "$@"'
-  alias la='eza -lha --icons "$@"'
-  alias l='eza -l --icons "$@"'
-  alias lsd='eza -lha --no-permissions --no-user --time-style=relative --icons "$@"'
-  alias lt='eza --tree --icons "$@"'
+  alias ls='eza --icons'
+  alias ll='eza -lh --icons'
+  alias la='eza -lha --icons'
+  alias l='eza -l --icons'
+  alias lsd='eza -lha --no-permissions --no-user --time-style=relative --icons'
+  alias lt='eza --tree --icons'
   alias lt1='lt --level=1'
   alias lt2='lt --level=2'
   alias lt3='lt --level=3'
@@ -173,39 +222,40 @@ if command -v eza >/dev/null 2>&1; then
   alias lt5='lt --level=5'
 fi
 
-# PostgreSQL control helpers
-alias startpostgresql="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-alias stoppostgresql="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+# Override POSTGRES_DATA_DIR in ~/.zshrc.local for a different cluster.
+startpostgresql() {
+  local data_dir="${POSTGRES_DATA_DIR:-${PGDATA:-/opt/homebrew/var/postgresql@16}}"
+  pg_ctl -D "$data_dir" -l "$data_dir/server.log" start
+}
+stoppostgresql() {
+  local data_dir="${POSTGRES_DATA_DIR:-${PGDATA:-/opt/homebrew/var/postgresql@16}}"
+  pg_ctl -D "$data_dir" stop -s -m fast
+}
 
-# Kill everything running on a specific port
+# Stop listeners on an exact TCP port.
 killport() {
-  local pids
-  pids=$(lsof -iTCP -sTCP:LISTEN -n -P | grep "$1" | awk '{print $2}')
-  [ -n "$pids" ] && kill $pids
+  if [[ $# != 1 || "$1" != <-> ]] || (( 10#$1 < 1 || 10#$1 > 65535 )); then
+    print -u2 'Usage: killport <port 1-65535>'
+    return 1
+  fi
+  local -aU pids
+  pids=("${(@f)$(lsof -tiTCP:"$1" -sTCP:LISTEN -n -P)}")
+  (( ${#pids} )) || return 0
+  kill -- "${pids[@]}"
 }
 
 # Media ripper helpers
-alias rip="~/Developer/dotfiles/scripts/rip-with-ffmpeg.sh $@"
-alias rip-yt="~/Developer/dotfiles/scripts/rip-yt.sh $@"
-alias tmp-codex="~/Developer/dotfiles/scripts/tmp-codex"
+alias rip='"$HOME/Developer/dotfiles/scripts/rip-with-ffmpeg.sh"'
+alias rip-yt='"$HOME/Developer/dotfiles/scripts/rip-yt.sh"'
+alias tmp-codex='"$HOME/Developer/dotfiles/scripts/tmp-codex"'
 
-# Local overrides for aliases and helpers
-if [ -f ~/.aliases.local ]; then
-  source ~/.aliases.local 2> /dev/null
-fi
-
-# bun completions
-[ -s "/Users/simonbs/.bun/_bun" ] && source "/Users/simonbs/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Go
-export PATH="$HOME/go/bin:$PATH"
+# Bun completions
+[[ ! -s "$BUN_INSTALL/_bun" ]] || source "$BUN_INSTALL/_bun"
 
 # Scaleway CLI autocomplete initialization.
-eval "$(scw autocomplete script shell=zsh)"
+if command -v scw >/dev/null 2>&1; then
+  eval "$(scw autocomplete script shell=zsh)"
+fi
 
 # Copilot wrapper to allow most things.
 copilot() {
@@ -216,7 +266,7 @@ copilot() {
 alias agents-tmux="tmux new-session -A -s agents"
 
 # Unity CLI
-. "/Users/simonbs/.unity/env"
+[[ ! -f "$HOME/.unity/env" ]] || source "$HOME/.unity/env"
 
 # Switching Codex accounts
 unalias codex codexb codexp codexfb codexfp 2>/dev/null
@@ -258,3 +308,17 @@ codex-with-args() {
 alias codexfb='codex-with-args "$HOME/.codex-framna-business"'
 alias codexfp='codex-with-args "$HOME/.codex-framna-personal"'
 alias codex='codexfb'
+
+# Local overrides take precedence over the defaults above.
+if [[ -f ~/.aliases.local ]]; then
+  source ~/.aliases.local
+fi
+
+# Initialize the prompt last, after shell integrations and local overrides
+# https://starship.rs
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  # Keep a usable prompt until Starship is installed
+  PROMPT='%F{cyan}%~%f %# '
+fi
