@@ -120,8 +120,9 @@ z() {
 }
 
 # Configures GPG tty
-# https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
-export GPG_TTY=$(tty)
+# Use Zsh's TTY because Powerlevel10k instant prompt redirects stdin.
+# https://github.com/romkatv/powerlevel10k#how-do-i-export-gpg_tty-when-using-instant-prompt
+export GPG_TTY=$TTY
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
