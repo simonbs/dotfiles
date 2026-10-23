@@ -304,6 +304,12 @@ alias codexfb='codex-with-args "$HOME/.codex-framna-business"'
 alias codexfp='codex-with-args "$HOME/.codex-framna-personal"'
 alias codex='codexfb'
 
+# Manage tool versions and switch automatically between projects
+# https://mise.jdx.dev
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
+
 # Local overrides take precedence over the defaults above.
 if [[ -f ~/.aliases.local ]]; then
   source ~/.aliases.local

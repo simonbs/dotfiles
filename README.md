@@ -7,11 +7,12 @@ My macOS settings for Zsh, Ghostty, Git, tmux, and other tools. Most Homebrew pa
 Install [Homebrew](https://brew.sh) first. Run these commands from this repository:
 
 ```sh
-brew install stow starship fzf eza bat tmux zoxide
+brew install stow starship fzf eza bat tmux zoxide mise
 brew install --cask font-fira-code-nerd-font
 brew tap simonbs/wut https://github.com/simonbs/wut.git
 brew install simonbs/wut/wut
-stow -t "$HOME" zsh starship tmux
+stow -t "$HOME" zsh starship tmux mise
+mise install
 git config --local core.hooksPath .githooks
 exec zsh
 ```
@@ -47,12 +48,27 @@ Put machine-specific environment settings in `~/.zshrc.local`. Put alias and fun
 
 `startpostgresql` and `stoppostgresql` use `/opt/homebrew/var/postgresql@16`. Set `POSTGRES_DATA_DIR` in `~/.zshrc.local` for a different database folder.
 
-If you set `XDG_CONFIG_HOME`, leave `starship` out of the first Stow command and link it separately:
+If you set `XDG_CONFIG_HOME`, leave `starship` and `mise` out of the first Stow command and link them separately:
 
 ```sh
 mkdir -p "$XDG_CONFIG_HOME"
 stow -d starship/.config -t "$XDG_CONFIG_HOME" .
+stow -d mise/.config -t "$XDG_CONFIG_HOME" .
+mise install
 ```
+
+## Node and mise
+
+[mise](https://mise.jdx.dev) manages Node versions. The default is Node LTS, configured in `mise/.config/mise/config.toml`. Zsh switches versions automatically when entering a project with a `mise.toml` or `.tool-versions` file.
+
+```sh
+mise use node@22          # Set a project version in mise.toml
+mise install              # Install tools declared by the current configuration
+mise upgrade node         # Update Node within the configured version
+mise current              # Show active tool versions
+```
+
+Commit a project’s `mise.toml` to share its version with others. Edit the dotfiles config to change the default version or add other tools, then run `mise install`.
 
 ## Ghostty and tmux
 
