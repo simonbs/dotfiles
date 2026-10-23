@@ -257,11 +257,6 @@ if command -v scw >/dev/null 2>&1; then
   eval "$(scw autocomplete script shell=zsh)"
 fi
 
-# Copilot wrapper to allow most things.
-copilot() {
-  command copilot --allow-all-paths --allow-all-tools --allow-all-urls "$@"
-}
-
 # Attach to agents tmux session
 alias agents-tmux="tmux new-session -A -s agents"
 
