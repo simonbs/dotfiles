@@ -44,18 +44,6 @@ gpg --list-keys
 
 Make sure to install the recommended MesloLGS fonts for icons to show up properly. [Instructions on installing the fonts can be found here](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#fonts).
 
-#### iTerm2
-
-iTerm2 can be [downloaded here](https://iterm2.com). Follow the steps below to use the settings stored in this repository with iTerm2.
-
-1. Open Preferences (CMD + ,)
-2. Select General.
-3. Select Preferences.
-4. Check "Load preferences from a custom folder or URL" and select the dotfiles folder as shown in the screenshot below.
-5. iTerm2 may have saved the local settings in the plist file. Quit iTerm2, revert the changes in the dotfiles repository and open iTerm2 again.
-
-<img width="600" src="https://raw.githubusercontent.com/simonbs/dotfiles/master/iterm2preferences.png"/>
-
 #### Ghostty
 
 Ghostty can be [downloaded here](https://ghostty.org). The preferences are stored in `~/Library/Application Support/com.mitchellh.ghostty`, so they should be stowewd like this:
