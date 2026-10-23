@@ -3,7 +3,7 @@ allow_symlinked_codex_home = true
 sqlite_home = "/Users/simonbs/.codex"
 
 model = "gpt-6-astra"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 model_context_window = 1000000
 model_auto_compact_token_limit = 1000000
 
