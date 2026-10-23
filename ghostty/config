@@ -2,7 +2,9 @@ window-width = 120
 window-height = 45
 window-save-state = always
 theme = Dracula
+# Use the original Fira Code for text, with Nerd Font fallback for icons.
 font-family = "Fira Code Retina"
+font-family = "FiraCode Nerd Font Mono"
 font-size = 16
 cursor-style = block
 shell-integration-features = no-cursor
@@ -15,7 +17,8 @@ macos-icon-screen-color = #0f2213
 clipboard-paste-protection = false
 copy-on-select = clipboard
 mouse-shift-capture = never
-window-padding-x = 2,0
+window-padding-x = 14
+window-padding-y = 12
 window-inherit-working-directory = true
 keybind = shift+enter=text:\n
 keybind = ctrl+h=goto_split:previous
