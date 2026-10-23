@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-expand-region'

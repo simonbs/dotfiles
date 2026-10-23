@@ -7,15 +7,14 @@ My macOS settings for Zsh, Ghostty, Git, tmux, and other tools. Most Homebrew pa
 Install [Homebrew](https://brew.sh) first. Run these commands from this repository:
 
 ```sh
-brew install stow starship fzf eza bat tmux zoxide mise
-brew install --cask font-fira-code-nerd-font
-brew tap simonbs/wut https://github.com/simonbs/wut.git
-brew install simonbs/wut/wut
+brew bundle
 stow -t "$HOME" zsh starship tmux mise
 mise install
 git config --local core.hooksPath .githooks
 exec zsh
 ```
+
+`Brewfile` lists the terminal, fonts, shell tools, Git tools, Python, and video helpers. Run `brew bundle check` to check for missing packages. `brew bundle` also upgrades installed packages; use `brew bundle --no-upgrade` to install only what is missing.
 
 The Git hook needs Python 3. It blocks commits that contain saved Codex project approvals or hook trust state and checks the files staged for commit.
 
@@ -72,7 +71,7 @@ Commit a project’s `mise.toml` to share its version with others. Edit the dotf
 
 ## Ghostty and tmux
 
-Install [Ghostty](https://ghostty.org), then link its settings:
+Ghostty is installed by `brew bundle`. Link its settings:
 
 ```sh
 mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
@@ -87,10 +86,9 @@ To hide macOS's “Last login” message in new terminals, run `touch ~/.hushlog
 
 ## Git and GPG
 
-Git uses delta for diffs, GitHub CLI for GitHub credentials, and GPG for signed commits. Change the name, email, and signing key in `git/.gitconfig` before using it on another account.
+Git uses delta for diffs, GitHub CLI for GitHub credentials, and GPG for signed commits. Fetching removes stale remote branch references. The first push of a new branch sets its upstream automatically. Change the name, email, and signing key in `git/.gitconfig` before using it on another account.
 
 ```sh
-brew install git-delta gh gnupg pinentry-mac
 stow -t "$HOME" git gnupg
 gh auth login
 gpg --import /path/to/private-key.asc
@@ -129,4 +127,16 @@ Run `codexfb` or `codexfp` to start. Plain `codex` uses the business account. `c
 | `Alfred.alfredpreferences` | Saved Alfred preferences; choose this folder in Alfred's preferences settings |
 | `scripts` | Video download helpers, an IPA copier, and a temporary-folder Codex launcher |
 
+Vim uses the fzf binary installed by Homebrew. Its plugins are installed on first launch.
+
 `rip` needs ffmpeg. `rip-yt` needs yt-dlp and ffmpeg and reads cookies from Chrome. `scripts/ipa-copier.py` copies Apple Configurator downloads to `~/Downloads`. `tmp-codex` runs Codex in a temporary folder and removes that folder when it exits.
+
+## Check changes
+
+Run from this repository after editing settings:
+
+```sh
+python3 scripts/check-config.py
+```
+
+The check needs Python 3.11 or newer, installed by `brew bundle`. It checks shell, Python, TOML, JSON, Git, and Brewfile syntax, then installs and removes Stow links in a temporary home folder. It also checks the custom `XDG_CONFIG_HOME` setup. Your installed settings are not changed. These checks do not launch apps or check their behavior.

@@ -63,6 +63,10 @@
   program = /opt/homebrew/bin/gpg
 [init]
   defaultBranch = main
+[fetch]
+  prune = true
+[push]
+  autoSetupRemote = true
 [pager]
   branch = false
 [interactive]

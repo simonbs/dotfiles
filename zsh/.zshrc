@@ -323,6 +323,3 @@ else
   # Keep a usable prompt until Starship is installed
   PROMPT='%F{cyan}%~%f %# '
 fi
-
-# bun completions
-[ -s "/Users/simonbs/.bun/_bun" ] && source "/Users/simonbs/.bun/_bun"
