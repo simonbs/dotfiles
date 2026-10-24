@@ -323,3 +323,6 @@ else
   # Keep a usable prompt until Starship is installed
   PROMPT='%F{cyan}%~%f %# '
 fi
+
+# Unity CLI
+. "/Users/simonbs/.unity/env"
