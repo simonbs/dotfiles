@@ -97,6 +97,8 @@ gpg --list-secret-keys --keyid-format LONG
 
 ## Codex accounts
 
+Codex defaults to “Approve for me”: it works inside the workspace sandbox and sends eligible approval requests to automatic review.
+
 Install the Codex CLI, then link its settings:
 
 ```sh
