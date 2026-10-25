@@ -119,13 +119,25 @@ codexfp login status
 
 Run `codexfb` or `codexfp` to start. Plain `codex` uses the business account. `command codex` bypasses these shortcuts. See [OpenAI's login documentation](https://learn.chatgpt.com/docs/auth) for other login methods.
 
+## Claude Code
+
+Link the Codex settings above first, then link Claude Code's settings and instructions:
+
+```sh
+mkdir -p "$HOME/.claude"
+stow -t "$HOME/.claude" claude
+```
+
+Claude imports the shared personal instructions from `~/.codex/AGENTS.md`. Edit `codex/AGENTS.md` to update them for both tools. Start a new Claude session after changing instructions.
+
+Claude uses auto permission mode and the Bash sandbox with auto-allow enabled. Sandboxed shell commands can run without individual approval; commands outside the sandbox follow auto mode's review. The sandbox limits shell access to files and network hosts; it does not cover Claude's file tools or MCP servers. The explicit command deny rules still apply.
+
 ## Other files
 
 | Folder | Use |
 | --- | --- |
 | `psql` | PostgreSQL command-line settings: `stow -t "$HOME" psql` |
 | `vim` | Vim settings and plugins: `stow -t "$HOME" vim` |
-| `claude` | Claude Code settings: create `~/.claude`, then `stow -t "$HOME/.claude" claude` |
 | `Alfred.alfredpreferences` | Saved Alfred preferences; choose this folder in Alfred's preferences settings |
 | `scripts` | Video download helpers, an IPA copier, and a temporary-folder Codex launcher |
 

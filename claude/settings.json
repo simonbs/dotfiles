@@ -3,13 +3,7 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": [
-      "Bash(*)",
-      "Read(**)",
-      "Write(**)",
-      "Edit(**)",
-      "WebFetch(*)"
-    ],
+    "defaultMode": "auto",
     "deny": [
       "Bash(rm -rf /*)",
       "Bash(rm -rf /)",
@@ -18,8 +12,11 @@
       "Bash(dd if=*of=/dev/*)",
       "Bash(shutdown*)",
       "Bash(reboot*)"
-    ],
-    "ask": []
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
   },
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
