@@ -1,7 +1,7 @@
 # Shared coding instructions
 
-These preferences apply to both Codex and Claude Code. Use the tools and capabilities
-available in the current session, and follow the repository's setup and test commands.
+Use the tools and capabilities available in the current session, and follow the
+repository's setup and test commands.
 
 ## Delegation
 
