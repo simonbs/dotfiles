@@ -10,6 +10,7 @@ sandbox_mode = "workspace-write"
 approvals_reviewer = "auto_review"
 
 notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+service_tier = "default"
 
 [notice]
 hide_rate_limit_model_nudge = true
