@@ -7,11 +7,11 @@
 	<key>hotkey</key>
 	<dict>
 		<key>key</key>
-		<integer>9</integer>
+		<integer>-1</integer>
 		<key>mod</key>
-		<integer>1310720</integer>
+		<integer>-1</integer>
 		<key>string</key>
-		<string>V</string>
+		<string></string>
 	</dict>
 </dict>
 </plist>
