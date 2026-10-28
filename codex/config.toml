@@ -2,8 +2,8 @@ allow_symlinked_codex_home = true
 # Share conversation history through a canonical SQLite directory.
 sqlite_home = "/Users/simonbs/.codex"
 
-model = "gpt-6-astra"
-model_reasoning_effort = "medium"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "low"
 
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
