@@ -160,6 +160,9 @@ enabled = true
 [plugins."chrome@openai-bundled"]
 enabled = true
 
+[plugins."harvest@framna"]
+enabled = true
+
 [marketplaces.openai-bundled]
 source_type = "local"
 source = "/Users/simonbs/.codex/.tmp/bundled-marketplaces/openai-bundled"
@@ -172,6 +175,10 @@ source = "/Users/simonbs/.cache/codex-runtimes/codex-primary-runtime/plugins/ope
 source_type = "git"
 source = "https://github.com/simonbs/agent-plugin-marketplace.git"
 ref = "main"
+
+[marketplaces.framna]
+source_type = "git"
+source = "git@github.com:framna-dk/agent-plugin-marketplace.git"
 
 [apps.asdk_app_6ac777de147081919b8fab18fea99c30]
 enabled = true
