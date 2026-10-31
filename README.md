@@ -14,7 +14,7 @@ git config --local core.hooksPath .githooks
 exec zsh
 ```
 
-`Brewfile` lists the terminal, fonts, shell tools, Git tools, Python, and video helpers. Run `brew bundle check` to check for missing packages. `brew bundle` also upgrades installed packages; use `brew bundle --no-upgrade` to install only what is missing.
+`Brewfile` lists the terminal, fonts, shell tools, mosh for remote terminal sessions, Git tools, Python, and video helpers. Run `brew bundle check` to check for missing packages. `brew bundle` also upgrades installed packages; use `brew bundle --no-upgrade` to install only what is missing.
 
 The Git hook needs Python 3. It blocks commits that contain saved Codex project approvals or hook trust state and checks the files staged for commit.
 
