@@ -78,11 +78,11 @@ mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
 stow -t "$HOME/Library/Application Support/com.mitchellh.ghostty" ghostty
 ```
 
-Ghostty uses Fira Code Retina for text and FiraCode Nerd Font Mono for missing icons. Reload settings with Cmd-Shift-comma, or restart Ghostty.
+Stow links `ghostty/config.ghostty` into Ghostty's settings folder. Edits to that file stay in dotfiles. Ghostty uses Fira Code Retina for text and FiraCode Nerd Font Mono for missing icons. Reload settings with Cmd-Shift-comma, or restart Ghostty.
 
 In tmux, press Ctrl-B, release it, then press `|` or `-` to split the window. Use `h`, `j`, `k`, `l` to move between panes, or `r` to reload settings.
 
-To hide macOS's “Last login” message in new terminals, run `touch ~/.hushlogin`.
+The Zsh Stow target includes `.hushlogin` to hide macOS's “Last login” message in new terminals.
 
 ## Git and GPG
 
