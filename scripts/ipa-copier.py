@@ -6,6 +6,9 @@ import os
 import shutil
 import getpass
 
+def report_walk_error(error):
+  raise SystemExit(f"Cannot scan Apple Configurator downloads: {error}")
+
 username = getpass.getuser()
 appsDir = "/Users/" + username + "/Library/Group Containers/K36BKF7T3D.group.com.apple.configurator/Library/Caches/Assets/TemporaryItems/MobileApps" # replace USER
 ipaDir = "/Users/" + username + "/Downloads/"
@@ -16,7 +19,7 @@ if not os.path.exists(ipaDir):
 print("Looking for IPA files..")
 ipaList = []
 while True:
-  for root, dirs, files in os.walk(appsDir):
+  for root, dirs, files in os.walk(appsDir, onerror=report_walk_error):
     for file in files:
       if file.endswith(".ipa"):
         if os.path.join(root, file) in ipaList:
