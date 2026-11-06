@@ -324,5 +324,3 @@ else
   PROMPT='%F{cyan}%~%f %# '
 fi
 
-# Unity CLI
-. "/Users/simonbs/.unity/env"
