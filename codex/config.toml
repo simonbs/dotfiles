@@ -7,7 +7,7 @@ model_reasoning_effort = "low"
 
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
-approvals_reviewer = "auto_review"
+approvals_reviewer = "guardian_subagent"
 
 notify = ["/Users/simonbs/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
@@ -67,8 +67,8 @@ NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.1021.31345"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/simonbs/.codex/plugins/cache/openai-bundled/browser/26.1021.31345/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.1029.61003"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/simonbs/.codex/plugins/cache/openai-bundled/browser/26.1029.61003/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/simonbs/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
@@ -90,7 +90,7 @@ show-context-window-usage = true
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
 followUpQueueMode = "queue"
-conversationDetailMode = "STEPS_PROSE"
+conversationDetailMode = "STEPS_COMMANDS"
 toys-confetti-enabled = true
 confirm-before-close = "never"
 ambient-suggestions-enabled = true
