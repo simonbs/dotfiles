@@ -1,0 +1,18 @@
+#!/bin/zsh
+# A detached runner keeps running after Alfred closes and surfaces failures.
+id="$1"
+name="$2"
+cache="$3"
+error_file=$(mktemp "$cache/run-error.XXXXXX") || exit 1
+/usr/bin/shortcuts run "$id" >/dev/null 2>"$error_file"
+result=$?
+if (( result != 0 )); then
+  # AppleScript arguments keep shortcut names and errors out of executable code.
+  /usr/bin/osascript - "$name" "$(head -c 600 "$error_file")" <<'APPLESCRIPT'
+on run argv
+  display notification (item 2 of argv) with title "Shortcut failed" subtitle (item 1 of argv)
+end run
+APPLESCRIPT
+fi
+/bin/rm -f "$error_file"
+exit "$result"

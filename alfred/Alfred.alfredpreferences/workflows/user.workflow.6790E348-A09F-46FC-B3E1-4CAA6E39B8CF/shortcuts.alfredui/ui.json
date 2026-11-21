@@ -1,0 +1,485 @@
+{
+  "bundleid": "com.simonbs.shortcuts-alfred",
+  "templates": {
+    "shortcutTile": {
+      "id": "{param:id}",
+      "type": "view",
+      "layout": "stack",
+      "cornerradius": "{var:tile_radius}",
+      "cliptobounds": true,
+      "border": {
+        "width": "{param:border_width}",
+        "colour": "{param:border_colour}"
+      },
+      "vetomovablebybackground": true,
+      "accessibility": {
+        "label": "{param:name}",
+        "help": "Run this shortcut. Command Return opens it for editing."
+      },
+      "tooltip": "{param:tooltip}",
+      "events": [
+        {
+          "triggers": "clicked",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "run",
+              "{param:item_id}"
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "type": "imageview",
+          "image": {
+            "type": "file",
+            "src": "{param:background}",
+            "size": {
+              "width": "{var:tile_width}",
+              "height": "{var:tile_height}"
+            }
+          },
+          "resize": "stretch"
+        },
+        {
+          "type": "view",
+          "layout": "border",
+          "padding": "{var:tile_padding}",
+          "components": [
+            {
+              "type": "view",
+              "layout": "border",
+              "constraints": {
+                "region": "top"
+              },
+              "components": [
+                {
+                  "type": "imageview",
+                  "constraints": {
+                    "region": "left",
+                    "position": "topleft",
+                    "size": {
+                      "width": "{var:tile_glyph_size}",
+                      "height": "{var:tile_glyph_size}"
+                    }
+                  },
+                  "image": {
+                    "type": "{param:glyph_type}",
+                    "src": "{param:glyph_source}",
+                    "size": {
+                      "width": "{var:tile_glyph_size}"
+                    }
+                  },
+                  "resize": "fit",
+                  "contenttintcolour": "#FFFFFF"
+                },
+                {
+                  "id": "{param:star_id}",
+                  "type": "label",
+                  "constraints": {
+                    "region": "right"
+                  },
+                  "text": "{param:favorite}",
+                  "colour": "#FFFFFFAA",
+                  "font": {
+                    "size": 12
+                  }
+                }
+              ]
+            },
+            {
+              "type": "label",
+              "constraints": {
+                "region": "bottom"
+              },
+              "text": "{param:title}",
+              "colour": "#FFFFFF",
+              "font": {
+                "size": "{var:tile_font_size}",
+                "weight": "semibold"
+              },
+              "linebreak": "wordwrap"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "log": {
+    "level": "error",
+    "internal": true
+  },
+  "variablesconfig": {
+    "initial_query": {
+      "src": "args[0]"
+    },
+    "grid_columns": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 5
+    },
+    "grid_rows": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 4
+    },
+    "tile_width": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 169
+    },
+    "tile_height": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 93
+    },
+    "grid_spacing": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 13
+    },
+    "tile_padding": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 16
+    },
+    "tile_font_size": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 14
+    },
+    "tile_glyph_size": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 22
+    },
+    "tile_radius": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 24
+    },
+    "title_width": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 137
+    },
+    "window_width": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 929
+    },
+    "window_height": {
+      "src": "variable",
+      "scriptenv": true,
+      "default": 535
+    },
+    "items": {
+      "scriptenv": true,
+      "default": []
+    },
+    "visible": {
+      "scriptenv": true,
+      "default": []
+    },
+    "query": {
+      "scriptenv": true,
+      "default": ""
+    },
+    "mode": {
+      "scriptenv": true,
+      "default": "all"
+    },
+    "page": {
+      "scriptenv": true,
+      "default": 0
+    },
+    "index": {
+      "scriptenv": true,
+      "default": 0
+    },
+    "favorites": {
+      "scriptenv": true,
+      "default": []
+    },
+    "sync_token": {
+      "scriptenv": true,
+      "default": ""
+    },
+    "sync_started": {
+      "scriptenv": true,
+      "default": 0
+    }
+  },
+  "window": {
+    "title": "Shortcuts",
+    "size": {
+      "width": "{var:window_width}",
+      "height": "{var:window_height}"
+    },
+    "padding": 16,
+    "root": {
+      "type": "view",
+      "layout": "border",
+      "shortcuts": [
+        {
+          "shortcut": "\u2191",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "move",
+              "up"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2193",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "move",
+              "down"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2190",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "move",
+              "left"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2192",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "move",
+              "right"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u21a9",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "run"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2318\u21a9",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "edit"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2318D",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "favorite"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2318R",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "reload"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2318\u2190",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "previous"
+            ]
+          }
+        },
+        {
+          "shortcut": "\u2318\u2192",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "next"
+            ]
+          }
+        }
+      ],
+      "events": [
+        {
+          "triggers": "preload",
+          "action": {
+            "type": "script",
+            "src": "scripts/controller",
+            "args": [
+              "init"
+            ]
+          }
+        }
+      ],
+      "components": [
+        {
+          "type": "view",
+          "layout": "border",
+          "padding": 12,
+          "background": {
+            "light": "#00000008",
+            "dark": "#FFFFFF0C"
+          },
+          "cornerradius": 12,
+          "constraints": {
+            "region": "top",
+            "insets": {
+              "bottom": 16
+            }
+          },
+          "components": [
+            {
+              "id": "search",
+              "type": "textfield",
+              "focus": true,
+              "bordered": false,
+              "focusring": false,
+              "background": null,
+              "placeholder": "Find a shortcut\u2026",
+              "font": {
+                "size": 18
+              },
+              "events": [
+                {
+                  "triggers": "changed",
+                  "action": {
+                    "type": "script",
+                    "src": "scripts/controller",
+                    "args": [
+                      "filter",
+                      "{value:self.text}"
+                    ]
+                  }
+                },
+                {
+                  "triggers": "actioned",
+                  "action": {
+                    "type": "script",
+                    "src": "scripts/controller",
+                    "args": [
+                      "run"
+                    ]
+                  }
+                }
+              ],
+              "constraints": {
+                "region": "centre"
+              }
+            },
+            {
+              "type": "imageview",
+              "constraints": {
+                "region": "left",
+                "insets": {
+                  "right": 10
+                }
+              },
+              "image": {
+                "type": "symbol",
+                "src": "magnifyingglass",
+                "size": {
+                  "width": 18
+                }
+              },
+              "contenttintcolour": "secondaryLabelColor"
+            },
+            {
+              "id": "favoritesButton",
+              "type": "button",
+              "text": "\u2606",
+              "bordered": false,
+              "events": [
+                {
+                  "triggers": "actioned",
+                  "action": {
+                    "type": "script",
+                    "src": "scripts/controller",
+                    "args": [
+                      "toggle-favorites"
+                    ]
+                  }
+                }
+              ],
+              "constraints": {
+                "region": "right"
+              },
+              "tooltip": "Show favorites"
+            }
+          ]
+        },
+        {
+          "type": "view",
+          "layout": "stack",
+          "constraints": {
+            "region": "centre"
+          },
+          "components": [
+            {
+              "id": "cards",
+              "type": "view",
+              "layout": "grid",
+              "cols": "{var:grid_columns}",
+              "rows": "{var:grid_rows}",
+              "spacing": "{var:grid_spacing}",
+              "components": []
+            },
+            {
+              "type": "label",
+              "text": "Your shortcuts will appear here.",
+              "font": {
+                "size": 17
+              },
+              "id": "empty",
+              "textalign": "centre",
+              "colour": "secondaryLabelColor",
+              "hidden": true
+            }
+          ]
+        },
+        {
+          "type": "view",
+          "id": "pagination",
+          "layout": "inline",
+          "spacing": 8,
+          "constraints": {
+            "region": "bottom",
+            "position": "centre",
+            "insets": {
+              "top": 10
+            }
+          },
+          "components": []
+        }
+      ]
+    }
+  }
+}

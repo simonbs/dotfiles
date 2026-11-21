@@ -1,0 +1,307 @@
+#!/usr/bin/osascript -l JavaScript
+ObjC.import('Foundation');
+ObjC.import('AppKit');
+function env(k) { const v=$.NSProcessInfo.processInfo.environment.objectForKey(k); return v.js; }
+function gridValue(value,fallback) {
+  const text=String(value===undefined?'':value).trim();
+  return /^\d+$/.test(text)?Math.max(3,Math.min(10,Number(text))):fallback;
+}
+const GRID_COLUMNS=gridValue(env('grid_columns'),5),GRID_ROWS=gridValue(env('grid_rows'),4);
+const PAGE_SIZE=GRID_COLUMNS*GRID_ROWS;
+function layoutGeometry(columns,rows,screenWidth,screenHeight) {
+  const scale=Math.min(1,(screenWidth-80)/(columns*169+(columns-1)*13),(screenHeight-172)/(rows*93+(rows-1)*13));
+  const width=Math.floor(169*scale),height=Math.floor(93*scale),spacing=Math.max(4,Math.floor(13*scale));
+  const padding=Math.max(4,Math.floor(16*scale));
+  return {grid_columns:columns,grid_rows:rows,tile_width:width,tile_height:height,grid_spacing:spacing,
+    tile_padding:padding,tile_font_size:Math.max(9,Math.floor(14*scale)),tile_glyph_size:Math.max(10,Math.floor(22*scale)),
+    tile_radius:Math.max(8,Math.floor(24*scale)),title_width:width-2*padding,
+    window_width:columns*width+(columns-1)*spacing+32,window_height:rows*height+(rows-1)*spacing+124};
+}
+function read(path,fallback) { try { return JSON.parse($.NSString.stringWithContentsOfFileEncodingError(path,$.NSUTF8StringEncoding,undefined).js); } catch(e) { return fallback; } }
+function write(path,value) {
+  const text=JSON.stringify(value), existing=$.NSString.stringWithContentsOfFileEncodingError(path,$.NSUTF8StringEncoding,undefined).js;
+  if(text!==existing) $(text).writeToFileAtomicallyEncodingError(path,true,$.NSUTF8StringEncoding,undefined);
+}
+function execute(path,args) {
+  const task=$.NSTask.alloc.init, out=$.NSPipe.pipe, err=$.NSPipe.pipe;
+  task.executableURL=$.NSURL.fileURLWithPath(path); task.arguments=args; task.standardOutput=out; task.standardError=err;
+  task.launchAndReturnError(undefined);
+  const data=out.fileHandleForReading.readDataToEndOfFile; task.waitUntilExit;
+  const output=$.NSString.alloc.initWithDataEncoding(data,$.NSUTF8StringEncoding).js||'';
+  if(task.terminationStatus!==0) throw new Error('Helper failed ('+task.terminationStatus+')');
+  return output;
+}
+const fm=$.NSFileManager.defaultManager;
+const root=env('alfred_workflow_cache') || ObjC.unwrap($.NSHomeDirectory())+'/Library/Caches/com.simonbs.shortcuts-alfred';
+fm.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(root,true,undefined,undefined);
+const catalogPath=root+'/catalog.json';
+const dataRoot=env('alfred_workflow_data')||root;
+fm.createDirectoryAtPathWithIntermediateDirectoriesAttributesError(dataRoot,true,undefined,undefined);
+const helper=ObjC.unwrap(fm.currentDirectoryPath)+'/scripts/library';
+function stored(k,fallback) { try { return JSON.parse(env(k)); } catch(e) { return fallback; } }
+function mergeCatalog(incoming,previous) {
+  const prior=new Map(previous.map(i=>[i.id,i]));
+  return incoming.map(item=>{
+    const old=prior.get(item.id)||{}, merged=Object.assign({},old,item);
+    if(!/^[0-9a-f]{6}$/i.test(item.color||'')) {
+      if(/^[0-9a-f]{6}$/i.test(old.color||'')) merged.color=old.color;
+      else delete merged.color;
+    }
+    return merged;
+  });
+}
+function loadCLI() {
+  return execute('/usr/bin/shortcuts',['list','--show-identifiers']).split('\n').flatMap(line=>{
+    const match=line.match(/^(.*) \(([0-9A-F-]{36})\)$/i);
+    return match?[{name:match[1],id:match[2],color:'8A8F98'}]:[];
+  });
+}
+function normal(s) { return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+function matches(item,query) {
+  const hay=normal(item.name+' '+(item.folder||''));
+  const initials=normal(item.name).split(/\s+/).map(w=>w[0]).join('');
+  return normal(query).trim().split(/\s+/).every(word=>hay.includes(word)||initials.startsWith(word));
+}
+function action(command,args) { return {type:'script',src:'scripts/controller',args:[command].concat(args||[])}; }
+function sameCatalog(a,b) {
+  const keys=['id','name','folder','subtitle','color','icon','background','glyph','asset_signature'];
+  return a.length===b.length&&a.every((item,index)=>keys.every(key=>item[key]===b[index][key]));
+}
+function prepareAssets(item) {
+  if(item.asset_signature&&item.background&&item.glyph&&fm.fileExistsAtPath(item.background)&&fm.fileExistsAtPath(item.glyph)) return;
+  if(item.icon&&fm.fileExistsAtPath(item.icon)) {
+    try {Object.assign(item,JSON.parse(execute(helper,['assets',root,item.icon])));} catch(e) {}
+  }
+}
+function gradient(item) {
+  if(item.background&&fm.fileExistsAtPath(item.background)) return item.background;
+  if(item.icon&&fm.fileExistsAtPath(item.icon)) {
+    const cached=root+'/native-gradients-v2/'+item.icon.split('/').pop();
+    if(fm.fileExistsAtPath(cached)) return cached;
+    try {return execute(helper,['background',root+'/native-gradients-v2',item.icon]).trim();} catch(e) {}
+  }
+  const color=/^[0-9a-f]{6}$/i.test(item.color||'')?item.color:'8464D8';
+  const path=root+'/'+color+'.png';
+  if (!fm.fileExistsAtPath(path)) execute(helper,['gradient',root,color]);
+  return path;
+}
+function card(item,selected,favorites) {
+  prepareAssets(item);
+  const background=gradient(item);
+  let glyph=item.glyph&&fm.fileExistsAtPath(item.glyph)?item.glyph:undefined;
+  if(!glyph&&item.icon&&fm.fileExistsAtPath(item.icon)) {
+    const cached=root+'/native-glyphs-v2/'+item.icon.split('/').pop();
+    if(fm.fileExistsAtPath(cached)) glyph=cached;
+    else {try {glyph=execute(helper,['glyph',root+'/native-glyphs-v2',item.icon,background]).trim();} catch(e) {}}
+  }
+  return {type:'template',src:'shortcutTile',params:{
+    id:'card-'+item.id,star_id:'star-'+item.id,item_id:item.id,
+    name:item.name,tooltip:item.name+'\n'+(item.folder||'All Shortcuts'),
+    title:tileTitle(item.name),background:background,
+    glyph_type:glyph?'file':'symbol',glyph_source:glyph||'square.stack.3d.up.fill',
+    favorite:favorites.includes(item.id)?'★':'',border_width:selected?2:0,border_colour:selected?'labelColor':null
+  }};
+}
+let titleAttributes;
+function tileTitle(name) {
+  // Explicit line breaks give native labels enough height for two lines.
+  const fontSize=Number(env('tile_font_size'))||14,titleWidth=Number(env('title_width'))||137;
+  if(!titleAttributes) titleAttributes=$.NSDictionary.dictionaryWithObjectForKey($.NSFont.systemFontOfSizeWeight(fontSize,$.NSFontWeightSemibold),$.NSFontAttributeName);
+  const fits=text=>$(text).sizeWithAttributes(titleAttributes).width<=titleWidth;
+  const words=name.split(/\s+/);let first=words.shift()||'';
+  while(words.length&&fits(first+' '+words[0])) first+=' '+words.shift();
+  if(!words.length) return first;
+  let second=words.join(' ');
+  if(!fits(second)) {while(second.length&&!fits(second+'…')) second=second.slice(0,-1);second=second.trimEnd()+'…';}
+  return first+'\n'+second;
+}
+function render(items,query,mode,page,index,favorites,message) {
+  let filtered=items.filter(i=>matches(i,query) && (mode!=='favorites'||favorites.includes(i.id)));
+  const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE)); page=Math.max(0,Math.min(page,pages-1));
+  const visible=filtered.slice(page*PAGE_SIZE,page*PAGE_SIZE+PAGE_SIZE); index=Math.max(0,Math.min(index,visible.length-1));
+  const components=visible.map((i,n)=>card(i,n===index,favorites));
+  while(components.length<PAGE_SIZE) components.push({type:'view'});
+  const empty=filtered.length===0;
+  return {variables:{items:items,query:query,mode:mode,page:page,index:index,visible:visible,favorites:favorites},update:{relayout:true,ids:{
+    cards:{cols:GRID_COLUMNS,rows:GRID_ROWS,components:components,hidden:empty},
+    empty:{hidden:!empty,text:items.length===0?'Your shortcuts will appear here. Press ⌘R to refresh.':mode==='favorites'?'No favorites yet. Select a shortcut in All Shortcuts and press ⌘D.':'No shortcuts match “'+query+'”.'},
+    favoritesButton:{text:mode==='favorites'?'★':'☆',tooltip:mode==='favorites'?'Show all shortcuts':'Show favorites'},
+    pagination:{hidden:pages===1,components:pages===1?[]:Array.from({length:pages},(_,p)=>({type:'button',bordered:false,text:p===page?'●':'○',tooltip:'Page '+(p+1),events:[{triggers:'actioned',action:action('page',[String(p)])}]}))}
+  }}};
+}
+function startSync(result) {
+  const pending=read(root+'/sync-job.json',{}), now=Date.now();
+  const reuse=/^[0-9A-F-]{36}$/i.test(pending.token||'')&&now-pending.started<45000&&!fm.fileExistsAtPath(root+'/sync-'+pending.token+'.json');
+  const token=reuse?pending.token:ObjC.unwrap($.NSUUID.UUID.UUIDString);
+  const started=reuse?pending.started:now;
+  if(!reuse) {
+    // Keep recent results for overlapping consumers, but bound old job files.
+    try {
+      const names=ObjC.deepUnwrap(fm.contentsOfDirectoryAtPathError(root,undefined));
+      names.filter(name=>/^sync-[0-9A-F-]{36}\.json$/i.test(name)).forEach(name=>{
+        const path=root+'/'+name, attributes=fm.attributesOfItemAtPathError(path,undefined);
+        const modified=attributes.objectForKey($.NSFileModificationDate);
+        if(now/1000-modified.timeIntervalSince1970>300) fm.removeItemAtPathError(path,undefined);
+      });
+    } catch(e) {}
+    write(root+'/sync-job.json',{token:token,started:started});
+  }
+  if(!reuse&&env('SHORTCUTS_DRY_RUN')!=='1') {
+    const task=$.NSTask.alloc.init;
+    task.executableURL=$.NSURL.fileURLWithPath(ObjC.unwrap(fm.currentDirectoryPath)+'/scripts/controller');
+    task.arguments=['worker',token];
+    task.standardOutput=$.NSFileHandle.fileHandleWithNullDevice;
+    task.standardError=$.NSFileHandle.fileHandleWithNullDevice;
+    task.launchAndReturnError(undefined);
+  }
+  result.variables=Object.assign(result.variables||{},{sync_token:token,sync_started:started});
+  result.pulse={src:'scripts/controller',args:['poll','{var:query}','{var:mode}','{var:page}','{var:index}','{var:favorites}','{var:sync_token}','{var:visible}','{var:sync_started}'],interval:0.5};
+  result.update=result.update||{ids:{}};
+  return result;
+}
+function dispatch(argv) {
+  let cmd=argv[0]||'init';
+  if(cmd==='layout') {
+    let width=1440,height=900;
+    try {const size=$.NSScreen.mainScreen.visibleFrame.size;width=size.width;height=size.height;} catch(e) {}
+    const geometry=layoutGeometry(GRID_COLUMNS,GRID_ROWS,width,height);
+    const variables=Object.fromEntries(Object.entries(geometry).map(([key,value])=>[key,String(value)]));
+    return {alfredworkflow:{arg:argv[1]||'',variables:variables}};
+  }
+  let items=stored('items',[]),query=env('query')||'',mode=env('mode')||'all',page=Number(env('page')||0),index=Number(env('index')||0),favorites=stored('favorites',[]);
+  if(cmd==='search') {
+    query=argv[1]||'';
+    const cache=read(catalogPath,[]);
+    try {
+      if(env('search_catalog_loaded')==='1') items=cache;
+      else {
+        const prior=new Map(cache.map(i=>[i.id,i]));
+        items=loadCLI().map(i=>Object.assign({},prior.get(i.id)||{},i,{color:(prior.get(i.id)||{}).color||i.color}));
+      }
+    } catch(e) {items=cache;}
+    write(catalogPath,items);
+    // Keep one metadata worker per Alfred search session, across keystrokes.
+    let token=env('search_sync_token')||'', started=Number(env('search_sync_started')||0);
+    if(!token) {
+      const sync=startSync({});token=sync.variables.sync_token;started=sync.variables.sync_started;
+    }
+    const path=root+'/sync-'+token+'.json', applied=env('search_sync_applied')===token;
+    const synced=applied?undefined:read(path,undefined);
+    let pending=!applied&&Date.now()-started<45000;
+    if(synced) {
+      pending=false;
+      if(synced.ok) {items=mergeCatalog(synced.items,items);write(catalogPath,items);}
+    }
+    let results;
+    if(!query.trim()) results=[{uid:'browse',title:'Shortcuts',subtitle:'Browse all shortcuts',arg:'browse',icon:{path:'icon.png'}}];
+    else results=items.filter(i=>matches(i,query)).map(i=>({
+      uid:i.id,title:i.name,subtitle:i.folder||'Run shortcut',arg:'run:'+i.id,
+      icon:{path:i.icon||'icon.png'},mods:{cmd:{arg:'edit:'+i.id,subtitle:'Edit in Shortcuts'}}
+    }));
+    if(!results.length) results=[{title:'No matching shortcuts',valid:false}];
+    const result={items:results,variables:{search_sync_token:token,search_sync_started:String(started),search_catalog_loaded:'1',search_sync_applied:(synced||applied)?token:''}};
+    if(pending) result.rerun=0.5;
+    return result;
+  }
+  if(cmd==='selected') {
+    const selection=argv[1]||'';
+    if(selection==='browse') {
+      if(env('SHORTCUTS_DRY_RUN')==='1') return {dryRun:{browse:true}};
+      execute('/usr/bin/open',['alfred://runtrigger/com.simonbs.shortcuts-alfred/shortcuts']);return {};
+    }
+    const match=selection.match(/^(run|edit):([0-9a-f-]{36})$/i);
+    if(!match) return {};
+    cmd=match[1];argv=[cmd,match[2]];items=read(catalogPath,[]);
+  }
+  if(cmd==='worker') {
+    const token=argv[1];
+    if(!/^[0-9A-F-]{36}$/i.test(token||'')) return {};
+    let result;
+    try {
+      const detailed=JSON.parse(execute(helper,['catalog',root+'/icons']));
+      if(!Array.isArray(detailed)||detailed.some(i=>!i.id||!i.name)) throw new Error('Invalid catalog');
+      result={ok:true,items:detailed};
+    } catch(e) { result={ok:false}; }
+    write(root+'/sync-'+token+'.json',result);
+    return {};
+  }
+  if(cmd==='poll') {
+    // Resolve current UI state on each pulse, never the state when sync started.
+    query=argv[1]||'';mode=argv[2]||'all';page=Number(argv[3]||0);index=Number(argv[4]||0);
+    favorites=JSON.parse(argv[5]||'[]');
+    const token=argv[6]||'';
+    if(!/^[0-9A-F-]{36}$/i.test(token)) return {pulse:{interval:0}};
+    const path=root+'/sync-'+token+'.json', result=read(path,undefined);
+    if(!result&&Date.now()-Number(argv[8]||0)<45000) return {};
+    let update;
+    if(result&&result.ok) {
+      const visible=JSON.parse(argv[7]||'[]'), selected=visible[index];
+      const previous=items;
+      items=mergeCatalog(result.items,items);
+      write(catalogPath,items);
+      if(selected) {
+        const filtered=items.filter(i=>matches(i,query)&&(mode!=='favorites'||favorites.includes(i.id)));
+        const position=filtered.findIndex(i=>i.id===selected.id);
+        if(position>=0) {page=Math.floor(position/PAGE_SIZE);index=position%PAGE_SIZE;}
+      }
+      update=sameCatalog(previous,items)?{update:{ids:{},relayout:false}}:render(items,query,mode,page,index,favorites);
+    } else {
+      update={update:{ids:{search:{tooltip:'Using cached icons. Shortcuts sync is currently unavailable.'}}}};
+    }
+    // Results can be consumed by both the Script Filter and the tile view.
+    update.pulse={interval:0};
+    update.variables=Object.assign(update.variables||{},{sync_token:''});
+    return update;
+  }
+  if(cmd==='init') {
+    const settings=read(dataRoot+'/favorites.json',[]); favorites=settings;
+    let cache=read(catalogPath,[]);
+    try { const listed=loadCLI(); const prior=new Map(cache.map(i=>[i.id,i])); items=listed.map(i=>Object.assign({},prior.get(i.id)||{},i,{color:(prior.get(i.id)||{}).color||i.color})); }
+    catch(e) { items=cache; }
+    query=env('initial_query')||''; mode='all';page=0;index=0;
+    write(catalogPath,items);
+    return startSync(render(items,query,mode,page,index,favorites));
+  } else if(cmd==='refresh') {
+    if(env('sync_token')) return {};
+    return startSync({});
+  } else if(cmd==='reload') {
+    items=read(catalogPath,items);
+    try { const previous=new Map(items.map(i=>[i.id,i]));items=loadCLI().map(i=>Object.assign({},i,previous.get(i.id)||{}));write(catalogPath,items); } catch(e) {}
+    page=0;index=0;
+    const result=render(items,query,mode,page,index,favorites);
+    return env('sync_token')?result:startSync(result);
+  } else if(cmd==='filter') { query=argv[1]||'';page=0;index=0;
+  } else if(cmd==='mode') { mode=argv[1];page=0;index=0;
+  } else if(cmd==='toggle-favorites') { mode=mode==='favorites'?'all':'favorites';page=0;index=0;
+  } else if(cmd==='page') { page=Number(argv[1]);index=0;
+  } else if(cmd==='move') {
+    const delta={left:-1,right:1,up:-GRID_COLUMNS,down:GRID_COLUMNS}[argv[1]]||0;
+    const visible=stored('visible',[]),next=Math.max(0,Math.min(index+delta,visible.length-1));
+    if(!visible.length||next===index) return {};
+    const ids={};
+    if(visible[index]) ids['card-'+visible[index].id]={border:{width:0,colour:null}};
+    ids['card-'+visible[next].id]={border:{width:2,colour:'labelColor'}};
+    return {variables:{index:next},update:{relayout:false,ids:ids}};
+  } else if(cmd==='next'||cmd==='previous') { page+=cmd==='next'?1:-1;index=0;
+  } else if(cmd==='favorite') {
+    const item=stored('visible',[])[index];
+    if(item) { favorites=favorites.includes(item.id)?favorites.filter(id=>id!==item.id):favorites.concat(item.id);write(dataRoot+'/favorites.json',favorites); }
+    if(mode!=='favorites'&&item) {
+      const ids={};ids['star-'+item.id]={text:favorites.includes(item.id)?'★':''};
+      return {variables:{favorites:favorites},update:{relayout:false,ids:ids}};
+    }
+  } else if(cmd==='run'||cmd==='edit') {
+    const selected=stored('visible',[])[index];
+    const item=argv[1]?items.find(i=>i.id===argv[1]):selected;
+    if(!item) return {};
+    // Identifiers are argv values, never interpolated into a shell command.
+    if(cmd==='edit') { execute('/usr/bin/open',['shortcuts://open-shortcut?id='+encodeURIComponent(item.id)]); return {finish:{}}; }
+    const task=$.NSTask.alloc.init;
+    task.executableURL=$.NSURL.fileURLWithPath(ObjC.unwrap(fm.currentDirectoryPath)+'/scripts/run-shortcut');
+    task.arguments=[item.id,item.name,root];task.standardOutput=$.NSFileHandle.fileHandleWithNullDevice;task.standardError=$.NSFileHandle.fileHandleWithNullDevice;
+    if(env('SHORTCUTS_DRY_RUN')==='1') return {dryRun:{executable:'/usr/bin/shortcuts',args:['run',item.id]}};
+    task.launchAndReturnError(undefined); return {finish:{}};
+  }
+  return render(items,query,mode,page,index,favorites);
+}
+function run(argv) { return JSON.stringify(dispatch(argv)); }
